@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CarHealthModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CarHealthModelStoreContainer">
+          <EntitySet Name="cartype" EntityType="CarHealthModel.Store.cartype" store:Type="Tables" Schema="carhealth" />
+        </EntityContainer>
+        <EntityType Name="cartype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BrandFirstLetter" Type="varchar" MaxLength="8" />
+          <Property Name="BrandName" Type="varchar" MaxLength="50" />
+          <Property Name="MfgrName" Type="varchar" MaxLength="50" />
+          <Property Name="CarTypeName" Type="varchar" MaxLength="50" />
+          <Property Name="CarTypeYear" Type="varchar" MaxLength="50" />
+          <Property Name="Specification" Type="varchar" MaxLength="50" />
+          <Property Name="BrandCountry" Type="varchar" MaxLength="10" />
+          <Property Name="Technology" Type="varchar" MaxLength="10" />
+          <Property Name="Grade" Type="varchar" MaxLength="10" />
+          <Property Name="GasDisplacement" Type="varchar" MaxLength="10" />
+          <Property Name="GearBox" Type="varchar" MaxLength="10" />
+          <Property Name="RecCreateDt" Type="datetime" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarHealthModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CarHealthEntities" p1:LazyLoadingEnabled="false">
+          <EntitySet Name="CarTypes" EntityType="CarHealthModel.CarType" />
+        </EntityContainer>
+        <EntityType Name="CarType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandFirstLetter" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="BrandName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MfgrName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CarTypeName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CarTypeYear" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Specification" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BrandCountry" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Technology" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Grade" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="GasDisplacement" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="GearBox" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarHealthModelStoreContainer" CdmEntityContainer="CarHealthEntities">
+          <EntitySetMapping Name="CarTypes">
+            <EntityTypeMapping TypeName="CarHealthModel.CarType">
+              <MappingFragment StoreEntitySet="cartype">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BrandFirstLetter" ColumnName="BrandFirstLetter" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="MfgrName" ColumnName="MfgrName" />
+                <ScalarProperty Name="CarTypeName" ColumnName="CarTypeName" />
+                <ScalarProperty Name="CarTypeYear" ColumnName="CarTypeYear" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="BrandCountry" ColumnName="BrandCountry" />
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="GasDisplacement" ColumnName="GasDisplacement" />
+                <ScalarProperty Name="GearBox" ColumnName="GearBox" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
