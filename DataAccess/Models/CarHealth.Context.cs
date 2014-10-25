@@ -16,7 +16,7 @@ namespace DataAccess.Models
     public partial class CarHealthEntities : DbContext
     {
         public CarHealthEntities()
-            : base("name=MyCarHealthEntities")
+            : base("name=CarHealthEntities")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
@@ -27,5 +27,11 @@ namespace DataAccess.Models
         }
     
         public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<CarRepairItem> CarRepairItems { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<VendorGroup> VendorGroups { get; set; }
+        public DbSet<VendorTag> VendorTags { get; set; }
+        public DbSet<VendorTagSource> VendorTagSources { get; set; }
     }
 }
