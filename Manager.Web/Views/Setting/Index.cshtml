@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "车型库管理";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+<h4><span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.6em;line-height: 1.6em;" class="km-icon km-organize"></span>CarType Management</h4>
+<div data-role="grid"
+     data-scrollable="true"
+     data-columns="[
+                                 { 'field': 'ProductName', 'width': 270 },
+                                 { 'field': 'UnitPrice' },
+                              ]"
+     data-bind="source: products,
+                            visible: isVisible,
+                            events: {
+                              save: onSave
+                            }"
+     style="width: 100%; height: 500px;"></div>
+
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        onSave: function (e) {
+            kendoConsole.log("event :: save(" + kendo.stringify(e.values, null, 4) + ")");
+        },
+        products: new kendo.data.DataSource({
+            schema: {
+                model: {
+                    id: "ProductID"
+                }
+            },
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products/create",
+                    dataType: "jsonp"
+                },
+                parameterMap: function (options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return { models: kendo.stringify(options.models) };
+                    }
+                }
+            }
+        })
+    });
+    kendo.bind($("body"), viewModel);
+</script>

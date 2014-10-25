@@ -23,17 +23,133 @@
     <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.dataviz.min.css" rel="stylesheet" />
 
     <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
-    @*<link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />*@
+    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
 
     <!-- jQuery JavaScript -->
     <script src="http://cdn.kendostatic.com/2014.2.1008/js/jquery.min.js"></script>
 
     <!-- Kendo UI combined JavaScript -->
     <script src="http://cdn.kendostatic.com/2014.2.1008/js/kendo.all.min.js"></script>
+
+    <style>
+        .cmt-page {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .cmt-page-body {
+            padding-top: .1em;
+        }
+
+        .cmt-page-header {
+            width: 100%;
+            margin: 0 auto;
+            padding-top: 120px;
+            background: url('http://demos.telerik.com/kendo-ui/content/web/menu/header.jpg') no-repeat 0 0;
+            -webkit-background-size: 100% 120px;
+            -o-background-size: 100% 120px;
+        }
+
+        .cmt-page-menu h2 {
+            font-size: 1em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="cmt-page">
+        <div class="cmt-page-header">
+            <ul class="cmt-page-menu">
+                <li>
+                    系统管理
+                    <ul>
+                        <li>
+                            车型库管理
+                        </li>
+                        <li>
+                            Decor
+                            <ul>
+                                <!-- moving the UL to the next line will cause an IE7 problem -->
+                                <li>Bed Linen</li>
+                                <li>Throws</li>
+                                <li>Curtains & Blinds</li>
+                                <li>Rugs</li>
+                                <li>Carpets</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Storage
+                            <ul>
+                                <!-- moving the UL to the next line will cause an IE7 problem -->
+                                <li>Wall Shelving</li>
+                                <li>Kids Storage</li>
+                                <li>Baskets</li>
+                                <li>Multimedia Storage</li>
+                                <li>Floor Shelving</li>
+                                <li>Toilet Roll Holders</li>
+                                <li>Storage Jars</li>
+                                <li>Drawers</li>
+                                <li>Boxes</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Lights
+                            <ul>
+                                <!-- moving the UL to the next line will cause an IE7 problem -->
+                                <li>Ceiling</li>
+                                <li>Table</li>
+                                <li>Floor</li>
+                                <li>Shades</li>
+                                <li>Wall Lights</li>
+                                <li>Spotlights</li>
+                                <li>Push Light</li>
+                                <li>String Lights</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Stores
+                    <ul>
+                        <li>
+                            <div id="template" style="padding: 10px;">
+                                <h2>Around the Globe</h2>
+                                <ol>
+                                    <li>United States</li>
+                                    <li>Europe</li>
+                                    <li>Canada</li>
+                                    <li>Australia</li>
+                                </ol>
+                                <img src="http://demos.telerik.com/kendo-ui/content/web/menu/map.png" alt="Stores Around the Globe" />
+                                <button class="k-button">See full list</button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Blog
+                </li>
+                <li>
+                    Company
+                </li>
+                <li>
+                    Events
+                </li>
+                <li disabled="disabled">
+                    News
+                </li>
+            </ul>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $(".cmt-page-menu").kendoMenu();
+            });
+        </script>
+
+        <div class="cmt-page-body k-content">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

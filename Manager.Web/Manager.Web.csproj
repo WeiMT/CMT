@@ -14,7 +14,7 @@
     <RootNamespace>Manager.Web</RootNamespace>
     <AssemblyName>Manager.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -830,8 +830,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\ApiSettingController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -953,6 +955,7 @@
     <Content Include="Scripts\Kendo\2014.2.1008\kendo.web.min.js.map" />
     <Content Include="Scripts\Kendo\2014.2.1008\kendo.window.min.js.map" />
     <Content Include="Views\Shared\_WebLayout.cshtml" />
+    <Content Include="Views\Setting\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -961,10 +964,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApiControllers\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Html\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
@@ -982,7 +983,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>39345</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:46883/</IISUrl>
+          <IISUrl>http://localhost/Manager.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
