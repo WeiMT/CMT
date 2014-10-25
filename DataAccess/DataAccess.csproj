@@ -72,7 +72,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CarHealth.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarRepairItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CarType.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendor.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorGroup.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorTag.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorTagSource.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
