@@ -16,6 +16,7 @@ namespace Manager.Web.ApiControllers
             using (var ctx = new CarHealthEntities())
             {
                 var cartTypes = ctx.CarTypes.Take(100).ToList();
+
                 return cartTypes;
             }
         }
