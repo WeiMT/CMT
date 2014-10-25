@@ -11,7 +11,7 @@ namespace Manager.Web.ApiControllers
     public class ApiSettingController : ApiController
     {
         [HttpGet]
-        public dynamic GetCarTypes(int id)
+        public List<CarType> GetCarTypes()
         {
             using (var ctx = new CarHealthEntities())
             {
