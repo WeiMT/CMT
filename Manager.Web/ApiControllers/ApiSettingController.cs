@@ -11,13 +11,19 @@ namespace Manager.Web.ApiControllers
     public class ApiSettingController : ApiController
     {
         [HttpGet]
-        public List<CarType> GetCarTypes()
+        public dynamic GetCarTypes(int skip, int take)
         {
             using (var ctx = new CarHealthEntities())
             {
-                var cartTypes = ctx.CarTypes.Take(100).ToList();    
+                var total = ctx.CarTypes.Count();
 
-                return cartTypes;
+                var carTypes = ctx.CarTypes.OrderBy(x=>x.BrandFirstLetter).Skip(skip).Take(take).ToList();
+
+                return new
+                {
+                    total = total,
+                    data = carTypes
+                };
             }
         }
     }
