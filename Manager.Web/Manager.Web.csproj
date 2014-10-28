@@ -843,6 +843,7 @@
     <Compile Include="ApiControllers\ApiSettingController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Extensions\QueryableExtension.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">

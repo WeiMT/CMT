@@ -16,7 +16,7 @@ namespace Manager.Web
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{actions}"
+                routeTemplate: "api/{controller}/{action}"
             );
         }
     }

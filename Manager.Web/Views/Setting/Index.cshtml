@@ -3,25 +3,41 @@
     Layout = "~/Views/Shared/_WebLayout.cshtml";
 }
 
-<h4>
-    <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.6em;line-height: 1.6em;" class="km-icon km-organize"></span>
-    CarType Management
-</h4>
+<p>
+    <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.2em;line-height: 1.2em;" class="km-icon km-organize"></span>
+    <span style="font-weight: bold;">CarType Management</span>
+</p>
+<div class="k-block" style="padding:.2em .3em; margin: 0 0 .5em 0;">asdf</div>
 <div id="gridCarType" data-role="grid"
      data-auto-bind="false"
      data-scrollable="true"
-     data-editable="true"
      data-pageable="true"
-     data-toolbar="['create', 'save']"
+     data-sortable="true"
+     data-filterable="false"
+     data-groupable="false"
      data-bind="source: carTypes"
+     data-editable="{
+                        mode: 'popup',
+                        window: {
+                            title: '编辑',
+                            animation: false
+                        },
+                        confirmation: true
+     }"
      data-columns="[
                         { 'field': 'BrandName', 'title': '品牌', 'width': 100 },
-                        { 'field': 'MfgrName', 'title': '制造商', 'width': 120 },
-                        { 'field': 'CarTypeName', 'title': '车型', 'width': 170 },
-                        { 'field': 'CarTypeYear', 'title': '年款', 'width': 90 },
-                        { 'field': 'Specification', 'title': '规格' },
-                    ]"
-     style="width: 100%; height: 600px;"></div>
+                        { 'field': 'MfgrName', 'title': '厂商', 'width': 100 },
+                        { 'field': 'CarTypeName', 'title': '车系', 'width': 150 },
+                        { 'field': 'CarTypeYear', 'title': '年款', 'width': 100 },
+                        { 'field': 'Specification', 'title': '车型', 'width': 260 },
+                        { 'field': 'BrandCountry', 'title': '国家', 'width': 100 },
+                        { 'field': 'Technology', 'title': '技术', 'width': 100 },
+                        { 'field': 'Grade', 'title': '级别', 'width': 100 },
+                        { 'field': 'GasDisplacement', 'title': '排气量', 'width': 110 },
+                        { 'field': 'GearBox', 'title': '变速箱', 'width': 110 },
+                        { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
+     ]"
+     style="width: 100%; height: 460px;"></div>
 
 <script>
     var vm = kendo.observable({
@@ -30,15 +46,33 @@
                 read: {
                     type: "GET",
                     url: "@Url.Content("~/api/ApiSetting/GetCarTypes")",
-                    contentType: 'application/json',
+                    dataType: "json",
+                    cache: false
+                },
+                update: {
+                    type: "POST",
+                    url: "@Url.Content("~/api/ApiSetting/UpdateCarType")",
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: "json",
+                    cache: false
+                },
+                destroy: {
+                    type: "POST",
+                    url: "@Url.Content("~/api/ApiSetting/DeleteCarType")",
+                    contentType: 'application/x-www-form-urlencoded',
                     dataType: "json",
                     cache: false
                 }
             },
             serverPaging: true,
-            serverSorting: false,
+            serverSorting: true,
+            serverGrouping: false,
+            serverFiltering: false,
             pageSize: 26,
             schema: {
+                model: {
+                    id: "Id"
+                },
                 total: "total",
                 data: "data"
             }
@@ -51,7 +85,7 @@
 
                 vm.carTypes.transport.options.read.data = parameter;
 
-                vm.carTypes.fetch(function() {
+                vm.carTypes.fetch(function () {
                     t.complete("success", "");
                 });
             });
