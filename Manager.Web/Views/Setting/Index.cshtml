@@ -7,7 +7,46 @@
     <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.2em;line-height: 1.2em;" class="km-icon km-organize"></span>
     <span style="font-weight: bold;">CarType Management</span>
 </p>
-<div class="k-block" style="padding:.2em .3em; margin: 0 0 .5em 0;">asdf</div>
+<div class="k-block" style="padding:.5em .5em; margin: 0 0 .5em 0;">
+    <div>
+        <label style="vertical-align: middle; padding-right: .5em;" for="schBrandName">品牌:</label>
+        <input type="search" id="schBrandName" style="width: 150px"
+               data-role="dropdownlist"
+               data-text-field="val"
+               data-value-field="key"
+               data-option-label="{ key: '', val: '全部' }"
+               data-auto-bind="false"
+               data-bind="source: brandNames,
+                          value: selectedBrandName" />
+        <label style="vertical-align: middle; padding-right: .5em;" for="schMfgrName">厂商:</label>
+        <input type="search" id="schMfgrName" style="width: 150px"
+               data-role="dropdownlist"
+               data-option-label="{ key: '', val: '全部' }"
+               data-text-field="val"
+               data-value-field="key"
+               data-auto-bind="false"
+               data-bind="source: mfgrNames,
+                          value: selectedMfgrName" />
+        <label style="vertical-align: middle; padding-right: .5em;" for="schCarTypeName">车系:</label>
+        <input type="search" id="schCarTypeName" style="width: 150px"
+               data-role="dropdownlist"
+               data-option-label="{ key: '', val: '全部' }"
+               data-text-field="val"
+               data-value-field="key"
+               data-auto-bind="false"
+               data-bind="source: carTypeNames,
+                          value: selectedCarTypeName" />
+        <label style="vertical-align: middle; padding-right: .5em;" for="schCarTypeYear">年款:</label>
+        <input type="search" id="schCarTypeYear" style="width: 150px"
+               data-role="dropdownlist"
+               data-option-label="{ key: '', val: '全部' }"
+               data-text-field="val"
+               data-value-field="key"
+               data-auto-bind="false"
+               data-bind="source: carTypeYears,
+                          value: selectedCarTypeYear" />
+    </div>
+</div>
 <div id="gridCarType" data-role="grid"
      data-auto-bind="false"
      data-scrollable="true"
@@ -41,6 +80,55 @@
 
 <script>
     var vm = kendo.observable({
+        //品牌下拉框数据源
+        brandNames: new kendo.data.DataSource({
+            transport: {
+                read: {
+                    type: "GET",
+                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeBrandNames")",
+                    dataType: "json",
+                    cache: false
+                }
+            }
+        }),
+        selectedBrandName: null,
+        //厂商下拉框数据源
+        mfgrNames: new kendo.data.DataSource({
+            transport: {
+                read: {
+                    type: "GET",
+                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeMfgrNames")",
+                    dataType: "json",
+                    cache: false
+                }
+            }
+        }),
+        selectedMfgrName: null,
+        //车系下拉框数据源
+        carTypeNames: new kendo.data.DataSource({
+            transport: {
+                read: {
+                    type: "GET",
+                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeNames")",
+                    dataType: "json",
+                    cache: false
+                }
+            }
+        }),
+        selectedCarTypeName: null,
+        //年款下拉框数据源
+        carTypeYears: new kendo.data.DataSource({
+            transport: {
+                read: {
+                    type: "GET",
+                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeYears")",
+                    dataType: "json",
+                    cache: false
+                }
+            }
+        }),
+        selectedCarTypeYear: null,
+        //车型库Grid数据源
         carTypes: new kendo.data.DataSource({
             transport: {
                 read: {
@@ -77,25 +165,143 @@
                 data: "data"
             }
         }),
-        pGetCarTypesAsync: function () {
+        pGetBrandNameAsync:function(param) {
             var task = Wind.Async.Task;
 
             return task.create(function (t) {
-                var parameter = { q: "html5" };
+                vm.brandNames.transport.options.read.data = param;
+                vm.brandNames.read();
 
-                vm.carTypes.transport.options.read.data = parameter;
+                vm.brandNames.one("requestEnd", function (e) {
+                    if (e.type == "read") {
+                        t.complete("success", vm.brandNames);
+                    }
+                });
+            });
+        },
+        pGetMfgrNameAsync: function (param) {
+            var task = Wind.Async.Task;
 
-                vm.carTypes.fetch(function () {
-                    t.complete("success", "");
+            return task.create(function (t) {
+                vm.mfgrNames.transport.options.read.data = param;
+                vm.mfgrNames.read();
+
+                vm.mfgrNames.one("requestEnd", function (e) {
+                    if (e.type == "read") {
+                        t.complete("success", vm.mfgrNames);
+                    }
+                });
+            });
+        },
+        pGetCarTypeNamesAsync: function (param) {
+            var task = Wind.Async.Task;
+
+            return task.create(function (t) {
+                vm.carTypeNames.transport.options.read.data = param;
+                vm.carTypeNames.read();
+
+                vm.carTypeNames.one("requestEnd", function (e) {
+                    if (e.type == "read") {
+                        t.complete("success", vm.carTypeNames);
+                    }
+                });
+            });
+        },
+        pGetCarTypeYearsAsync: function (param) {
+            var task = Wind.Async.Task;
+
+            return task.create(function (t) {
+                vm.carTypeYears.transport.options.read.data = param;
+                vm.carTypeYears.read();
+
+                vm.carTypeYears.one("requestEnd", function (e) {
+                    if (e.type == "read") {
+                        t.complete("success", vm.carTypeYears);
+                    }
+                });
+            });
+        },
+        pGetCarTypesAsync: function (param) {
+            var task = Wind.Async.Task;
+
+            console.log("start get car types");
+
+            return task.create(function (t) {                
+                vm.carTypes.transport.options.read.data = param;
+                vm.carTypes.read();
+
+                vm.carTypes.one("requestEnd", function (e) {
+                    if (e.type == "read") {
+                        vm.carTypes.page(1);
+                        t.complete("success", vm.carTypes);
+                    }
                 });
             });
         },
         ViewLoaded: function () {
-            var task = eval(Wind.compile("async", function (idx) {
-                $await(vm.pGetCarTypesAsync());
-            }));
+            vm.pGetCarTypesAsync().start();
+        }
+    });
 
-            task().start();
+    vm.bind("change", function (e) {
+        var selectedBrandNameChanged = e.field == "selectedBrandName";
+        var selectedMfgrNameChanged = e.field == "selectedMfgrName";
+        var selectedCarTypeNameChanged = e.field == "selectedCarTypeName";
+        var selectedCarTypeYearChanged = e.field == "selectedCarTypeYear";
+
+        if (selectedBrandNameChanged) {
+            var param = {
+                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key
+            };
+
+            if (vm.get("selectedMfgrName") == null) {                
+                vm.pGetCarTypesAsync(param).start();                
+            } else {
+                vm.set("selectedMfgrName", null);
+            }
+            
+            vm.pGetMfgrNameAsync(param).start();
+        }
+
+        if (selectedMfgrNameChanged) {
+            param = {
+                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
+                mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key
+            };
+
+            if (vm.get("selectedCarTypeName") == null) {                
+                vm.pGetCarTypesAsync(param).start();
+            } else {
+                vm.set("selectedCarTypeName", null);
+            }
+
+            vm.pGetCarTypeNamesAsync(param).start();
+        }
+
+        if (selectedCarTypeNameChanged) {
+            param = {
+                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
+                mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key,
+                carTypeName: vm.get("selectedCarTypeName") == null ? "" : vm.get("selectedCarTypeName").key
+            };
+
+            if (vm.get("selectedCarTypeYear") == null) {
+                vm.pGetCarTypesAsync(param).start();
+            } else {
+                vm.set("selectedCarTypeYear", null);
+            }
+            
+            vm.pGetCarTypeYearsAsync(param).start();
+        }
+
+        if (selectedCarTypeYearChanged) {
+            param = {
+                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
+                mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key,
+                carTypeName: vm.get("selectedCarTypeName") == null ? "" : vm.get("selectedCarTypeName").key,
+                carTypeYear: vm.get("selectedCarTypeYear") == null ? "" : vm.get("selectedCarTypeYear").key
+            };
+            vm.pGetCarTypesAsync(param).start();
         }
     });
 

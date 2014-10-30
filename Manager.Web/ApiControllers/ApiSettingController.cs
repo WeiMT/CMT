@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using DataAccess.Models;
 using Manager.Web.Common.Extensions;
@@ -13,15 +14,14 @@ namespace Manager.Web.ApiControllers
     {
         [HttpGet]
         [ActionName("GetCarTypes")]
-        public dynamic GetCarTypes(int skip, int take)
+        public dynamic GetCarTypes(int skip, int take, string brandName = "", string mfgrName = "",
+            string carTypeName = "", string carTypeYear = "")
         {
             var sortField = Request.RequestUri.ParseQueryString()["sort[0][field]"];
             var sortDir = Request.RequestUri.ParseQueryString()["sort[0][dir]"];
 
             using (var ctx = new CarHealthEntities())
             {
-                var total = ctx.CarTypes.Count();
-
                 IQueryable<CarType> carTypes;
 
                 if (String.IsNullOrEmpty(sortField) || String.IsNullOrEmpty(sortDir))
@@ -33,6 +33,24 @@ namespace Manager.Web.ApiControllers
                     carTypes = ctx.CarTypes.OrderBy(sortField, sortDir == "desc");
                 }
 
+                if (!String.IsNullOrEmpty(brandName))
+                {
+                    carTypes = carTypes.Where(x => x.BrandName == brandName);
+                }
+                if (!String.IsNullOrEmpty(mfgrName))
+                {
+                    carTypes = carTypes.Where(x => x.MfgrName == mfgrName);
+                }
+                if (!String.IsNullOrEmpty(carTypeName))
+                {
+                    carTypes = carTypes.Where(x => x.CarTypeName == carTypeName);
+                }
+                if (!String.IsNullOrEmpty(carTypeYear))
+                {
+                    carTypes = carTypes.Where(x => x.CarTypeYear == carTypeYear);
+                }
+
+                var total = carTypes.Count();
                 carTypes = carTypes.Skip(skip).Take(take);
 
                 return new
@@ -74,7 +92,7 @@ namespace Manager.Web.ApiControllers
                 }
 
                 return null;
-            }            
+            }
         }
 
         [HttpPost]
@@ -98,7 +116,55 @@ namespace Manager.Web.ApiControllers
                 }
 
                 return false;
-            }            
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetCarTypeBrandNames")]
+        public dynamic GetCarTypeBrandNames()
+        {
+            using (var ctx = new CarHealthEntities())
+            {
+                var brandNames = ctx.CarTypes.Select(x => x.BrandName).Distinct().ToList();
+
+                return brandNames.OrderBy(x => x).Select(x => new {key = x, val = x});
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetCarTypeMfgrNames")]
+        public dynamic GetCarTypeMfgrNames(string brandName = "")
+        {
+            using (var ctx = new CarHealthEntities())
+            {
+                var mfgrNames = ctx.CarTypes.Where(x => x.BrandName == brandName).Select(x => x.MfgrName).Distinct().ToList();
+                return mfgrNames.OrderBy(x => x).Select(x => new { key = x, val = x });
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetCarTypeNames")]
+        public dynamic GetCarTypeNames(string brandName = "" ,string mfgrName = "")
+        {
+            using (var ctx = new CarHealthEntities())
+            {
+                var carTypeNames = ctx.CarTypes.Where(x => x.BrandName == brandName && x.MfgrName == mfgrName)
+                    .Select(x => x.CarTypeName).Distinct().ToList();
+                return carTypeNames.OrderBy(x => x).Select(x => new { key = x, val = x });
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetCarTypeYears")]
+        public dynamic GetCarTypeYears(string brandName = "" ,string mfgrName = "",string carTypeName = "")
+        {
+            using (var ctx = new CarHealthEntities())
+            {
+                var carTypeYears = ctx.CarTypes.Where(x => x.BrandName == brandName && x.MfgrName == mfgrName && x.CarTypeName == carTypeName)
+                    .Select(x => x.CarTypeYear).Distinct().ToList();
+
+                return carTypeYears.OrderBy(x => x).Select(x => new { key = x, val = x });
+            }
         }
     }
 }
