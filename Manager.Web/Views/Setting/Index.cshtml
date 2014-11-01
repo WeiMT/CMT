@@ -224,15 +224,16 @@
         pGetCarTypesAsync: function (param) {
             var task = Wind.Async.Task;
 
-            console.log("start get car types");
+            return task.create(function (t) {
+                if (vm.carTypes.page() != 1) {
+                    vm.carTypes.page(1);
+                }
 
-            return task.create(function (t) {                
                 vm.carTypes.transport.options.read.data = param;
                 vm.carTypes.read();
 
                 vm.carTypes.one("requestEnd", function (e) {
                     if (e.type == "read") {
-                        vm.carTypes.page(1);
                         t.complete("success", vm.carTypes);
                     }
                 });
@@ -254,7 +255,7 @@
                 brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key
             };
 
-            if (vm.get("selectedMfgrName") == null) {                
+            if (vm.get("selectedMfgrName") == null) {
                 vm.pGetCarTypesAsync(param).start();                
             } else {
                 vm.set("selectedMfgrName", null);
