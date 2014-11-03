@@ -1,0 +1,31 @@
+﻿.cmt-page {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .cmt-page-body {
+            padding-top: .1em;
+        }
+
+        .cmt-page-header {
+            width: 100%;
+            margin: 0 auto;
+            padding-top: 80px;
+            background: url('http://demos.telerik.com/kendo-ui/content/web/menu/header.jpg') no-repeat 0 0;
+            -webkit-background-size: 100% 120px;
+            -o-background-size: 100% 120px;
+        }
+
+        .cmt-page-menu h2 {
+            font-size: 1em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+        }
+
+        .cmt-well-title {
+            font-size: 1.2857em;
+            line-height: 1.2857em;
+            border-bottom: 1px solid #e7e7e7;
+            margin: -5px -19px 0.8333em;
+            padding: 0 19px 0.7222em;
+        }

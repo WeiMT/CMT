@@ -3,11 +3,15 @@
     Layout = "~/Views/Shared/_WebLayout.cshtml";
 }
 
-<p>
+@*<p>
     <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.2em;line-height: 1.2em;" class="km-icon km-organize"></span>
     <span style="font-weight: bold;">CarType Management</span>
-</p>
-<div class="k-block" style="padding:.5em .5em; margin: 0 0 .5em 0;">
+</p>*@
+<h3>
+    CarType Management
+</h3>
+
+<div>
     <div>
         <label style="vertical-align: middle; padding-right: .5em;" for="schBrandName">品牌:</label>
         <input type="search" id="schBrandName" style="width: 150px"
@@ -47,6 +51,7 @@
                           value: selectedCarTypeYear" />
     </div>
 </div>
+
 <div id="gridCarType" data-role="grid"
      data-auto-bind="false"
      data-scrollable="true"
