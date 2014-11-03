@@ -1,4 +1,6 @@
-﻿*,
+﻿/* reset everything to the default box model */
+
+*,
 :before,
 :after
 {

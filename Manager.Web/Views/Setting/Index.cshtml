@@ -3,15 +3,9 @@
     Layout = "~/Views/Shared/_WebLayout.cshtml";
 }
 
-@*<p>
-        <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.2em;line-height: 1.2em;" class="km-icon km-organize"></span>
-        <span style="font-weight: bold;">CarType Management</span>
-    </p>*@
-<h3>
-    CarType Management
-</h3>
+<h1 class="page-header">CarType Management</h1>
 
-<div>
+<p>
     <div>
         <label style="vertical-align: middle; padding-right: .5em;" for="schBrandName">品牌:</label>
         <input type="search" id="schBrandName" style="width: 150px"
@@ -50,17 +44,18 @@
                data-bind="source: carTypeYears,
                           value: selectedCarTypeYear" />
     </div>
-</div>
+</p>
 
-<div id="gridCarType" data-role="grid"
-     data-auto-bind="false"
-     data-scrollable="true"
-     data-pageable="true"
-     data-sortable="true"
-     data-filterable="false"
-     data-groupable="false"
-     data-bind="source: carTypes"
-     data-editable="{
+<p>
+    <div id="gridCarType" data-role="grid"
+         data-auto-bind="false"
+         data-scrollable="true"
+         data-pageable="true"
+         data-sortable="true"
+         data-filterable="false"
+         data-groupable="false"
+         data-bind="source: carTypes"
+         data-editable="{
                         mode: 'popup',
                         window: {
                             title: '编辑',
@@ -68,7 +63,7 @@
                         },
                         confirmation: true
      }"
-     data-columns="[
+         data-columns="[
                         { 'field': 'BrandName', 'title': '品牌', 'width': 100 },
                         { 'field': 'MfgrName', 'title': '厂商', 'width': 100 },
                         { 'field': 'CarTypeName', 'title': '车系', 'width': 150 },
@@ -81,7 +76,9 @@
                         { 'field': 'GearBox', 'title': '变速箱', 'width': 110 },
                         { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
      ]"
-     style="width: 100%; height: 460px;"></div>
+         style="width: 100%; height: 500px;"></div>
+</p>
+
 @section script
 {
     <script>
