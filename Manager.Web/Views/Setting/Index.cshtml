@@ -4,9 +4,9 @@
 }
 
 @*<p>
-    <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.2em;line-height: 1.2em;" class="km-icon km-organize"></span>
-    <span style="font-weight: bold;">CarType Management</span>
-</p>*@
+        <span style="color: #00B312;display: inline-block;margin-right: .4em;font-size: 1.2em;line-height: 1.2em;" class="km-icon km-organize"></span>
+        <span style="font-weight: bold;">CarType Management</span>
+    </p>*@
 <h3>
     CarType Management
 </h3>
@@ -82,236 +82,238 @@
                         { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
      ]"
      style="width: 100%; height: 460px;"></div>
+@section script
+{
+    <script>
+        var vm = kendo.observable({
+            //品牌下拉框数据源
+            brandNames: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/ApiSetting/GetCarTypeBrandNames")",
+                        dataType: "json",
+                        cache: false
+                    }
+                }
+            }),
+            selectedBrandName: null,
+            //厂商下拉框数据源
+            mfgrNames: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/ApiSetting/GetCarTypeMfgrNames")",
+                        dataType: "json",
+                        cache: false
+                    }
+                }
+            }),
+            selectedMfgrName: null,
+            //车系下拉框数据源
+            carTypeNames: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/ApiSetting/GetCarTypeNames")",
+                        dataType: "json",
+                        cache: false
+                    }
+                }
+            }),
+            selectedCarTypeName: null,
+            //年款下拉框数据源
+            carTypeYears: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/ApiSetting/GetCarTypeYears")",
+                        dataType: "json",
+                        cache: false
+                    }
+                }
+            }),
+            selectedCarTypeYear: null,
+            //车型库Grid数据源
+            carTypes: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/ApiSetting/GetCarTypes")",
+                        dataType: "json",
+                        cache: false
+                    },
+                    update: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/ApiSetting/UpdateCarType")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    destroy: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/ApiSetting/DeleteCarType")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    }
+                },
+                serverPaging: true,
+                serverSorting: true,
+                serverGrouping: false,
+                serverFiltering: false,
+                pageSize: 26,
+                schema: {
+                    model: {
+                        id: "Id"
+                    },
+                    total: "total",
+                    data: "data"
+                }
+            }),
+            pGetBrandNameAsync: function (param) {
+                var task = Wind.Async.Task;
 
-<script>
-    var vm = kendo.observable({
-        //品牌下拉框数据源
-        brandNames: new kendo.data.DataSource({
-            transport: {
-                read: {
-                    type: "GET",
-                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeBrandNames")",
-                    dataType: "json",
-                    cache: false
-                }
-            }
-        }),
-        selectedBrandName: null,
-        //厂商下拉框数据源
-        mfgrNames: new kendo.data.DataSource({
-            transport: {
-                read: {
-                    type: "GET",
-                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeMfgrNames")",
-                    dataType: "json",
-                    cache: false
-                }
-            }
-        }),
-        selectedMfgrName: null,
-        //车系下拉框数据源
-        carTypeNames: new kendo.data.DataSource({
-            transport: {
-                read: {
-                    type: "GET",
-                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeNames")",
-                    dataType: "json",
-                    cache: false
-                }
-            }
-        }),
-        selectedCarTypeName: null,
-        //年款下拉框数据源
-        carTypeYears: new kendo.data.DataSource({
-            transport: {
-                read: {
-                    type: "GET",
-                    url: "@Url.Content("~/api/ApiSetting/GetCarTypeYears")",
-                    dataType: "json",
-                    cache: false
-                }
-            }
-        }),
-        selectedCarTypeYear: null,
-        //车型库Grid数据源
-        carTypes: new kendo.data.DataSource({
-            transport: {
-                read: {
-                    type: "GET",
-                    url: "@Url.Content("~/api/ApiSetting/GetCarTypes")",
-                    dataType: "json",
-                    cache: false
-                },
-                update: {
-                    type: "POST",
-                    url: "@Url.Content("~/api/ApiSetting/UpdateCarType")",
-                    contentType: 'application/x-www-form-urlencoded',
-                    dataType: "json",
-                    cache: false
-                },
-                destroy: {
-                    type: "POST",
-                    url: "@Url.Content("~/api/ApiSetting/DeleteCarType")",
-                    contentType: 'application/x-www-form-urlencoded',
-                    dataType: "json",
-                    cache: false
-                }
+                return task.create(function (t) {
+                    vm.brandNames.transport.options.read.data = param;
+                    vm.brandNames.read();
+
+                    vm.brandNames.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.brandNames);
+                        }
+                    });
+                });
             },
-            serverPaging: true,
-            serverSorting: true,
-            serverGrouping: false,
-            serverFiltering: false,
-            pageSize: 26,
-            schema: {
-                model: {
-                    id: "Id"
-                },
-                total: "total",
-                data: "data"
+            pGetMfgrNameAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.mfgrNames.transport.options.read.data = param;
+                    vm.mfgrNames.read();
+
+                    vm.mfgrNames.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.mfgrNames);
+                        }
+                    });
+                });
+            },
+            pGetCarTypeNamesAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.carTypeNames.transport.options.read.data = param;
+                    vm.carTypeNames.read();
+
+                    vm.carTypeNames.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.carTypeNames);
+                        }
+                    });
+                });
+            },
+            pGetCarTypeYearsAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.carTypeYears.transport.options.read.data = param;
+                    vm.carTypeYears.read();
+
+                    vm.carTypeYears.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.carTypeYears);
+                        }
+                    });
+                });
+            },
+            pGetCarTypesAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    if (vm.carTypes.page() != 1) {
+                        vm.carTypes.page(1);
+                    }
+
+                    vm.carTypes.transport.options.read.data = param;
+                    vm.carTypes.read();
+
+                    vm.carTypes.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.carTypes);
+                        }
+                    });
+                });
+            },
+            ViewLoaded: function () {
+                vm.pGetCarTypesAsync().start();
             }
-        }),
-        pGetBrandNameAsync:function(param) {
-            var task = Wind.Async.Task;
+        });
 
-            return task.create(function (t) {
-                vm.brandNames.transport.options.read.data = param;
-                vm.brandNames.read();
+        vm.bind("change", function (e) {
+            var selectedBrandNameChanged = e.field == "selectedBrandName";
+            var selectedMfgrNameChanged = e.field == "selectedMfgrName";
+            var selectedCarTypeNameChanged = e.field == "selectedCarTypeName";
+            var selectedCarTypeYearChanged = e.field == "selectedCarTypeYear";
 
-                vm.brandNames.one("requestEnd", function (e) {
-                    if (e.type == "read") {
-                        t.complete("success", vm.brandNames);
-                    }
-                });
-            });
-        },
-        pGetMfgrNameAsync: function (param) {
-            var task = Wind.Async.Task;
+            if (selectedBrandNameChanged) {
+                var param = {
+                    brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key
+                };
 
-            return task.create(function (t) {
-                vm.mfgrNames.transport.options.read.data = param;
-                vm.mfgrNames.read();
-
-                vm.mfgrNames.one("requestEnd", function (e) {
-                    if (e.type == "read") {
-                        t.complete("success", vm.mfgrNames);
-                    }
-                });
-            });
-        },
-        pGetCarTypeNamesAsync: function (param) {
-            var task = Wind.Async.Task;
-
-            return task.create(function (t) {
-                vm.carTypeNames.transport.options.read.data = param;
-                vm.carTypeNames.read();
-
-                vm.carTypeNames.one("requestEnd", function (e) {
-                    if (e.type == "read") {
-                        t.complete("success", vm.carTypeNames);
-                    }
-                });
-            });
-        },
-        pGetCarTypeYearsAsync: function (param) {
-            var task = Wind.Async.Task;
-
-            return task.create(function (t) {
-                vm.carTypeYears.transport.options.read.data = param;
-                vm.carTypeYears.read();
-
-                vm.carTypeYears.one("requestEnd", function (e) {
-                    if (e.type == "read") {
-                        t.complete("success", vm.carTypeYears);
-                    }
-                });
-            });
-        },
-        pGetCarTypesAsync: function (param) {
-            var task = Wind.Async.Task;
-
-            return task.create(function (t) {
-                if (vm.carTypes.page() != 1) {
-                    vm.carTypes.page(1);
+                if (vm.get("selectedMfgrName") == null) {
+                    vm.pGetCarTypesAsync(param).start();
+                } else {
+                    vm.set("selectedMfgrName", null);
                 }
 
-                vm.carTypes.transport.options.read.data = param;
-                vm.carTypes.read();
-
-                vm.carTypes.one("requestEnd", function (e) {
-                    if (e.type == "read") {
-                        t.complete("success", vm.carTypes);
-                    }
-                });
-            });
-        },
-        ViewLoaded: function () {
-            vm.pGetCarTypesAsync().start();
-        }
-    });
-
-    vm.bind("change", function (e) {
-        var selectedBrandNameChanged = e.field == "selectedBrandName";
-        var selectedMfgrNameChanged = e.field == "selectedMfgrName";
-        var selectedCarTypeNameChanged = e.field == "selectedCarTypeName";
-        var selectedCarTypeYearChanged = e.field == "selectedCarTypeYear";
-
-        if (selectedBrandNameChanged) {
-            var param = {
-                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key
-            };
-
-            if (vm.get("selectedMfgrName") == null) {
-                vm.pGetCarTypesAsync(param).start();                
-            } else {
-                vm.set("selectedMfgrName", null);
+                vm.pGetMfgrNameAsync(param).start();
             }
-            
-            vm.pGetMfgrNameAsync(param).start();
-        }
 
-        if (selectedMfgrNameChanged) {
-            param = {
-                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
-                mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key
-            };
+            if (selectedMfgrNameChanged) {
+                param = {
+                    brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
+                    mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key
+                };
 
-            if (vm.get("selectedCarTypeName") == null) {                
+                if (vm.get("selectedCarTypeName") == null) {
+                    vm.pGetCarTypesAsync(param).start();
+                } else {
+                    vm.set("selectedCarTypeName", null);
+                }
+
+                vm.pGetCarTypeNamesAsync(param).start();
+            }
+
+            if (selectedCarTypeNameChanged) {
+                param = {
+                    brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
+                    mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key,
+                    carTypeName: vm.get("selectedCarTypeName") == null ? "" : vm.get("selectedCarTypeName").key
+                };
+
+                if (vm.get("selectedCarTypeYear") == null) {
+                    vm.pGetCarTypesAsync(param).start();
+                } else {
+                    vm.set("selectedCarTypeYear", null);
+                }
+
+                vm.pGetCarTypeYearsAsync(param).start();
+            }
+
+            if (selectedCarTypeYearChanged) {
+                param = {
+                    brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
+                    mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key,
+                    carTypeName: vm.get("selectedCarTypeName") == null ? "" : vm.get("selectedCarTypeName").key,
+                    carTypeYear: vm.get("selectedCarTypeYear") == null ? "" : vm.get("selectedCarTypeYear").key
+                };
                 vm.pGetCarTypesAsync(param).start();
-            } else {
-                vm.set("selectedCarTypeName", null);
             }
+        });
 
-            vm.pGetCarTypeNamesAsync(param).start();
-        }
-
-        if (selectedCarTypeNameChanged) {
-            param = {
-                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
-                mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key,
-                carTypeName: vm.get("selectedCarTypeName") == null ? "" : vm.get("selectedCarTypeName").key
-            };
-
-            if (vm.get("selectedCarTypeYear") == null) {
-                vm.pGetCarTypesAsync(param).start();
-            } else {
-                vm.set("selectedCarTypeYear", null);
-            }
-            
-            vm.pGetCarTypeYearsAsync(param).start();
-        }
-
-        if (selectedCarTypeYearChanged) {
-            param = {
-                brandName: vm.get("selectedBrandName") == null ? "" : vm.get("selectedBrandName").key,
-                mfgrName: vm.get("selectedMfgrName") == null ? "" : vm.get("selectedMfgrName").key,
-                carTypeName: vm.get("selectedCarTypeName") == null ? "" : vm.get("selectedCarTypeName").key,
-                carTypeYear: vm.get("selectedCarTypeYear") == null ? "" : vm.get("selectedCarTypeYear").key
-            };
-            vm.pGetCarTypesAsync(param).start();
-        }
-    });
-
-    //view section
-    kendo.bind(document.body, vm);
-    vm.ViewLoaded();
-</script>
+        //view section
+        kendo.bind(document.body, vm);
+        vm.ViewLoaded();
+    </script>
+}

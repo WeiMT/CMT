@@ -14,22 +14,25 @@
     <title>@ViewBag.Title</title>
 
     <!-- Bootstrap CSS -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Bootstrap/3.3.0/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- Common Kendo UI CSS -->
-    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- Default Kendo UI theme CSS -->
-    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- (optional) Kendo UI DataViz CSS, include only if you will use the data visualisation features -->
-    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
-    <link href="http://cdn.kendostatic.com/2014.2.1008/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.default.mobile.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- Kendo UI & Bootstrap Compatible CSS  -->
     <link href="@Url.Content("~/Content/Styles/kendo-bootstrap-compatible.css")" rel="stylesheet" type="text/css" />
+    
+    <!-- Site CSS -->
+    <link href="@Url.Content("~/Content/Styles/site.css")" rel="stylesheet" type="text/css" />
 
     @RenderSection("Style", false)
 
@@ -37,8 +40,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="@Url.Content("~/Content/Bootstrap/3.3.0/js/html5shiv.min.js")"></script>
+      <script src="@Url.Content("~/Content/Bootstrap/3.3.0/js/respond.min.js")"></script>
     <![endif]-->
 </head>
 <body>
@@ -132,14 +135,14 @@
     </div>
 
     <!-- jQuery JavaScript -->
-    <script src="http://cdn.kendostatic.com/2014.2.1008/js/jquery.min.js"></script>
+    <script src="@Url.Content("~/Content/KendoUI/2014.2.1008/js/jquery.min.js")"></script>
 
     <!-- Kendo UI combined JavaScript -->
-    <script src="http://cdn.kendostatic.com/2014.2.1008/js/kendo.all.min.js"></script>
-    <script src="http://cdn.kendostatic.com/2014.2.1008/js/messages/kendo.messages.zh-CN.min.js"></script>
+    <script src="@Url.Content("~/Content/KendoUI/2014.2.1008/js/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Content/KendoUI/2014.2.1008/js/messages/kendo.messages.zh-CN.min.js")"></script>
 
     <!-- Bootstrap Javascript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/Content/Bootstrap/3.3.0/js/bootstrap.min.js")"></script>
 
     <script src="@Url.Content("~/Scripts/jquery.linq.min.js")"></script>
     <script src="@Url.Content("~/Scripts/wind-all-min-0.7.3.js")"></script>
