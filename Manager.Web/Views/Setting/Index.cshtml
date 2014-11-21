@@ -4,7 +4,31 @@
 }
 
 <h1 class="page-header">CarType Management</h1>
-
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li class="active">Data</li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+</ol>
 <p>
     <div>
         <label style="vertical-align: middle; padding-right: .5em;" for="schBrandName">品牌:</label>
@@ -43,6 +67,8 @@
                data-auto-bind="false"
                data-bind="source: carTypeYears,
                           value: selectedCarTypeYear" />
+        
+        <button data-role="button" data-icon="plus" class="pull-right" data-bind="click:CreateCarType">新增</button>
     </div>
 </p>
 
@@ -168,66 +194,66 @@
                     data: "data"
                 }
             }),
-            pGetBrandNameAsync: function (param) {
+            pGetBrandNameAsync: function(param) {
                 var task = Wind.Async.Task;
 
-                return task.create(function (t) {
+                return task.create(function(t) {
                     vm.brandNames.transport.options.read.data = param;
                     vm.brandNames.read();
 
-                    vm.brandNames.one("requestEnd", function (e) {
+                    vm.brandNames.one("requestEnd", function(e) {
                         if (e.type == "read") {
                             t.complete("success", vm.brandNames);
                         }
                     });
                 });
             },
-            pGetMfgrNameAsync: function (param) {
+            pGetMfgrNameAsync: function(param) {
                 var task = Wind.Async.Task;
 
-                return task.create(function (t) {
+                return task.create(function(t) {
                     vm.mfgrNames.transport.options.read.data = param;
                     vm.mfgrNames.read();
 
-                    vm.mfgrNames.one("requestEnd", function (e) {
+                    vm.mfgrNames.one("requestEnd", function(e) {
                         if (e.type == "read") {
                             t.complete("success", vm.mfgrNames);
                         }
                     });
                 });
             },
-            pGetCarTypeNamesAsync: function (param) {
+            pGetCarTypeNamesAsync: function(param) {
                 var task = Wind.Async.Task;
 
-                return task.create(function (t) {
+                return task.create(function(t) {
                     vm.carTypeNames.transport.options.read.data = param;
                     vm.carTypeNames.read();
 
-                    vm.carTypeNames.one("requestEnd", function (e) {
+                    vm.carTypeNames.one("requestEnd", function(e) {
                         if (e.type == "read") {
                             t.complete("success", vm.carTypeNames);
                         }
                     });
                 });
             },
-            pGetCarTypeYearsAsync: function (param) {
+            pGetCarTypeYearsAsync: function(param) {
                 var task = Wind.Async.Task;
 
-                return task.create(function (t) {
+                return task.create(function(t) {
                     vm.carTypeYears.transport.options.read.data = param;
                     vm.carTypeYears.read();
 
-                    vm.carTypeYears.one("requestEnd", function (e) {
+                    vm.carTypeYears.one("requestEnd", function(e) {
                         if (e.type == "read") {
                             t.complete("success", vm.carTypeYears);
                         }
                     });
                 });
             },
-            pGetCarTypesAsync: function (param) {
+            pGetCarTypesAsync: function(param) {
                 var task = Wind.Async.Task;
 
-                return task.create(function (t) {
+                return task.create(function(t) {
                     if (vm.carTypes.page() != 1) {
                         vm.carTypes.page(1);
                     }
@@ -235,19 +261,22 @@
                     vm.carTypes.transport.options.read.data = param;
                     vm.carTypes.read();
 
-                    vm.carTypes.one("requestEnd", function (e) {
+                    vm.carTypes.one("requestEnd", function(e) {
                         if (e.type == "read") {
                             t.complete("success", vm.carTypes);
                         }
                     });
                 });
             },
-            ViewLoaded: function () {
+            CreateCarType: function() {
+                $("#gridCarType").data("kendoGrid").addRow();
+            },
+            ViewLoaded: function() {
                 vm.pGetCarTypesAsync().start();
             }
         });
 
-        vm.bind("change", function (e) {
+        vm.bind("change", function(e) {
             var selectedBrandNameChanged = e.field == "selectedBrandName";
             var selectedMfgrNameChanged = e.field == "selectedMfgrName";
             var selectedCarTypeNameChanged = e.field == "selectedCarTypeName";
