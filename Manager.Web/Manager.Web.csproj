@@ -49,13 +49,13 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MySql.Data.6.9.3\lib\net45\MySql.Data.dll</HintPath>
+      <HintPath>..\packages\MySql.Data.6.9.5\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MySql.Data.Entity.6.9.3\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <HintPath>..\packages\MySql.Data.Entity.6.9.5\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,8 +124,9 @@
     <Reference Include="WebApiContrib.Formatting.Jsonp">
       <HintPath>..\packages\WebApiContrib.Formatting.Jsonp.3.0.0.0\lib\net45\WebApiContrib.Formatting.Jsonp.dll</HintPath>
     </Reference>
-    <Reference Include="Z.ExtensionMethods">
-      <HintPath>..\packages\Z.ExtensionMethods.1.3.0.0\lib\Z.ExtensionMethods.dll</HintPath>
+    <Reference Include="Z.ExtensionMethods, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Z.ExtensionMethods.1.4.0.0\lib\Z.ExtensionMethods.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -849,7 +850,6 @@
     <Content Include="Content\KendoUI\2014.2.1008\styles\Uniform\sprite_2x.png" />
     <Content Include="Content\Styles\site.css" />
     <Content Include="Global.asax" />
-    <Content Include="License.txt" />
     <Content Include="Content\Bootstrap\3.3.0\css\bootstrap-theme.css.map" />
     <Content Include="Content\Bootstrap\3.3.0\css\bootstrap.css.map" />
     <Content Include="Content\Bootstrap\3.3.0\fonts\glyphicons-halflings-regular.eot" />
@@ -969,6 +969,7 @@
     <Content Include="Content\KendoUI\2014.2.1008\styles\images\kendoui.woff" />
     <None Include="Properties\PublishProfiles\CarHealth.Manager.Web.pubxml" />
     <None Include="Scripts\jquery.linq-vsdoc.js" />
+    <Content Include="Readme.txt" />
     <Content Include="Scripts\jquery.linq.js" />
     <Content Include="Scripts\jquery.linq.min.js" />
     <Content Include="Content\Styles\kendo-bootstrap-compatible.css" />

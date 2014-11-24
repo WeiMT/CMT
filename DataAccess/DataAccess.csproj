@@ -36,13 +36,13 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MySql.Data.6.9.3\lib\net45\MySql.Data.dll</HintPath>
+      <HintPath>..\packages\MySql.Data.6.9.5\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MySql.Data.Entity.6.9.3\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <HintPath>..\packages\MySql.Data.Entity.6.9.5\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Article.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarAccessoryItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CarHealth.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -72,19 +78,91 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CarHealth.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarRepairItem.cs">
+    <Compile Include="Models\CarServiceItem.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarType.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiscountScheme.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiscountSchemeItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FavourableScheme.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RepairRecordEvaluate.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemDict.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SystemSetting.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserCar.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserCarRefuel.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserCarRepairRecord.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserCarRepairRecordItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserCarRepairRecordPic.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserFavorit.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vendor.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VendorGroup.cs">
+    <Compile Include="Models\VendorBill.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorBillItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCarAccessoryItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCard.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCardLog.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCardType.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCarServiceItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorEmployee.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorFunc.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorOrder.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorOrderItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorPic.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorService.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VendorTag.cs">
@@ -93,10 +171,31 @@
     <Compile Include="Models\VendorTagSource.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VendorUser.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorUserRole.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorUserRoleFunc.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WashingCard.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WashingCardLog.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WashingCardType.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Content Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <EntityDeploy Include="Models\CarHealth.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CarHealth.Designer.cs</LastGenOutput>

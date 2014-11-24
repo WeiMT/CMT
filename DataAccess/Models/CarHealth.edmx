@@ -4,17 +4,49 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CarHealthModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="carrepairitem">
+      <Schema Namespace="CarHealthModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="article">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="200" />
+          <Property Name="TitlePicUrl" Type="varchar" MaxLength="200" />
+          <Property Name="IssueDt" Type="datetime" Precision="0" />
+          <Property Name="VendorId" Type="bigint" />
+          <Property Name="ViewCount" Type="int" />
+          <Property Name="ReviewCount" Type="int" />
+          <Property Name="IsRecommend" Type="int" />
+          <Property Name="Content" Type="varchar" MaxLength="5000" />
+          <Property Name="RecommendDt" Type="datetime" Precision="0" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="caraccessoryitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NamePinyin" Type="varchar" MaxLength="500" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
           <Property Name="Memo" Type="varchar" MaxLength="500" />
-          <Property Name="IsCommon" Type="bool" />
+          <Property Name="IsCommon" Type="int" />
+          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="carserviceitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NamePinyin" Type="varchar" MaxLength="500" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="Memo" Type="varchar" MaxLength="500" />
+          <Property Name="IsCommon" Type="int" />
           <Property Name="SubSystem" Type="varchar" MaxLength="200" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
@@ -38,6 +70,75 @@
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="discountscheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="discountschemeitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchemeId" Type="bigint" Nullable="false" />
+          <Property Name="ServiceItemId" Type="bigint" />
+          <Property Name="AccessoryItemId" Type="bigint" />
+          <Property Name="DiscountType" Type="int" />
+          <Property Name="DiscountRate" Type="int" />
+          <Property Name="DiscountPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Member" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="favourablescheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="StartDt" Type="datetime" Precision="0" />
+          <Property Name="EndDt" Type="datetime" Precision="0" />
+          <Property Name="CustomerRange" Type="int" Nullable="false" />
+          <Property Name="CardTypeIds" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DiscountSchemeId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="repairrecordevaluate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="RecordId" Type="bigint" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="systemdict">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="systemsetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,6 +156,94 @@
           <Property Name="RecStatus" Type="int" Nullable="false" />
           <Property Name="AvatarUrl" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="usercar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="CarTypeId" Type="bigint" />
+          <Property Name="CarNo" Type="varchar" MaxLength="20" />
+          <Property Name="FrameNo" Type="varchar" MaxLength="20" />
+          <Property Name="EngineNo" Type="varchar" MaxLength="20" />
+          <Property Name="LicenseNo" Type="varchar" MaxLength="20" />
+          <Property Name="IsDefault" Type="int" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usercarrefuel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="RefuelDt" Type="datetime" Precision="0" />
+          <Property Name="Mileage" Type="int" />
+          <Property Name="FuelType" Type="varchar" MaxLength="50" />
+          <Property Name="FuelAmmount" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SurplusMileage" Type="int" />
+          <Property Name="SurplusAmmount" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="StationBrand" Type="varchar" MaxLength="50" />
+          <Property Name="RefuelPlace" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usercarrepairrecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserCarId" Type="bigint" Nullable="false" />
+          <Property Name="IsManul" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" />
+          <Property Name="RepairDt" Type="datetime" Precision="0" />
+          <Property Name="RepairPlace" Type="varchar" MaxLength="200" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usercarrepairrecorditem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecordId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usercarrepairrecordpic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecordId" Type="bigint" Nullable="false" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="200" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userfavorit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="LinkerId" Type="bigint" Nullable="false" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="vendor">
           <Key>
             <PropertyRef Name="Id" />
@@ -64,7 +253,6 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="2000" />
           <Property Name="Type" Type="int" Nullable="false" />
-          <Property Name="Category" Type="int" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
           <Property Name="Telephone" Type="varchar" MaxLength="20" />
           <Property Name="Cellphone" Type="varchar" MaxLength="20" />
@@ -74,19 +262,202 @@
           <Property Name="Memo" Type="varchar" MaxLength="200" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
-          <Property Name="GroupId" Type="bigint" />
-          <Property Name="PicUrl" Type="varchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="vendorgroup">
+        <EntityType Name="vendorbill">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="OrderId" Type="bigint" />
+          <Property Name="VendorCardId" Type="bigint" />
+          <Property Name="FavourableSchemeId" Type="bigint" />
+          <Property Name="BillDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PayPattern" Type="bigint" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RealCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsDiscount" Type="int" />
+          <Property Name="IsManualDiscount" Type="int" />
+          <Property Name="ManualDiscountAmmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Memo" Type="varchar" MaxLength="200" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendorbillitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BillId" Type="bigint" Nullable="false" />
+          <Property Name="OrderItemId" Type="bigint" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RealCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsDiscount" Type="int" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStaus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendorcaraccessoryitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NamePinyin" Type="varchar" MaxLength="500" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Memo" Type="varchar" MaxLength="500" />
+          <Property Name="IsCommon" Type="int" />
+          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendorcard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="TypeId" Type="bigint" Nullable="false" />
+          <Property Name="CustomerCellphone" Type="varchar" MaxLength="20" />
+          <Property Name="CardNo" Type="varchar" MaxLength="20" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Credits" Type="int" />
+          <Property Name="IssueDt" Type="datetime" Precision="0" />
+          <Property Name="LatestUseDt" Type="datetime" Precision="0" />
+          <Property Name="CancelDt" Type="datetime" Precision="0" />
+          <Property Name="Status" Type="int" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendorcardlog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="bigint" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Credits" Type="int" />
+          <Property Name="LogDt" Type="datetime" Precision="0" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="RechargePattern" Type="bigint" />
+        </EntityType>
+        <EntityType Name="vendorcardtype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsRechargable" Type="int" Nullable="false" />
+          <Property Name="RechargeRate" Type="varchar" MaxLength="50" />
+          <Property Name="IsDiscountable" Type="int" Nullable="false" />
+          <Property Name="DiscountSchemeId" Type="bigint" />
+          <Property Name="NextCardTypeId" Type="bigint" />
+          <Property Name="NextCardTypeCredits" Type="int" />
+          <Property Name="IsOnlineSelfService" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="vendorcarserviceitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NamePinyin" Type="varchar" MaxLength="500" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Memo" Type="varchar" MaxLength="500" />
+          <Property Name="IsCommon" Type="int" />
+          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendoremployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="20" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="20" />
+          <Property Name="Speciality" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="Level" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="vendorfunc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="Sort" Type="int" />
+        </EntityType>
+        <EntityType Name="vendororder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="CustomerCellphone" Type="varchar" MaxLength="20" />
+          <Property Name="CustomCarNo" Type="varchar" MaxLength="20" />
+          <Property Name="VendorCardId" Type="bigint" />
+          <Property Name="RepairDt" Type="datetime" Precision="0" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendororderitem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="bigint" Nullable="false" />
+          <Property Name="RepairType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ItemType" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="bigint" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Unit" Type="varchar" MaxLength="10" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendorpic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="VendorEmployeeId" Type="bigint" />
+          <Property Name="VendorServiceId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="vendorservice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="vendortag">
           <Key>
@@ -95,73 +466,277 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorId" Type="bigint" Nullable="false" />
           <Property Name="TagId" Type="bigint" Nullable="false" />
+          <Property Name="Sort" Type="int" />
         </EntityType>
         <EntityType Name="vendortagsource">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ShortName" Type="varchar" MaxLength="50" />
           <Property Name="Memo" Type="varchar" MaxLength="200" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="CarHealthModelStoreContainer">
-          <EntitySet Name="carrepairitem" EntityType="Self.carrepairitem" Schema="carhealth" store:Type="Tables" />
-          <EntitySet Name="cartype" EntityType="Self.cartype" Schema="carhealth" store:Type="Tables" />
-          <EntitySet Name="user" EntityType="Self.user" Schema="carhealth" store:Type="Tables" />
-          <EntitySet Name="vendor" EntityType="Self.vendor" Schema="carhealth" store:Type="Tables" />
-          <EntitySet Name="vendorgroup" EntityType="Self.vendorgroup" Schema="carhealth" store:Type="Tables" />
-          <EntitySet Name="vendortag" EntityType="Self.vendortag" Schema="carhealth" store:Type="Tables" />
-          <EntitySet Name="vendortagsource" EntityType="Self.vendortagsource" Schema="carhealth" store:Type="Tables" />
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="CarHealthModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="CarHealthEntities" p1:LazyLoadingEnabled="false">
-          <EntitySet Name="CarTypes" EntityType="CarHealthModel.CarType" />
-          <EntitySet Name="CarRepairItems" EntityType="CarHealthModel.CarRepairItem" />
-          <EntitySet Name="Users" EntityType="CarHealthModel.User" />
-          <EntitySet Name="Vendors" EntityType="CarHealthModel.Vendor" />
-          <EntitySet Name="VendorGroups" EntityType="CarHealthModel.VendorGroup" />
-          <EntitySet Name="VendorTags" EntityType="CarHealthModel.VendorTag" />
-          <EntitySet Name="VendorTagSources" EntityType="CarHealthModel.VendorTagSource" />
-        </EntityContainer>
-        <EntityType Name="CarType">
+        <EntityType Name="vendoruser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="BrandFirstLetter" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
-          <Property Name="BrandName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="MfgrName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="CarTypeName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="CarTypeYear" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Specification" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="BrandCountry" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Technology" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Grade" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="GasDisplacement" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="GearBox" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
-          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LatestLoginDt" Type="datetime" Precision="0" />
+          <Property Name="LatestLoginIp" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="CarRepairItem">
+        <EntityType Name="vendoruserrole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="vendoruserrolefunc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" Nullable="false" />
+          <Property Name="FuncId" Type="bigint" Nullable="false" />
+          <Property Name="Sort" Type="int" />
+        </EntityType>
+        <EntityType Name="washingcard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="CardTypeId" Type="bigint" Nullable="false" />
+          <Property Name="CardNo" Type="varchar" MaxLength="20" />
+          <Property Name="CustomerCellphone" Type="varchar" MaxLength="20" />
+          <Property Name="Balance" Type="int" Nullable="false" />
+          <Property Name="IssueDt" Type="datetime" Precision="0" />
+          <Property Name="LatestUseDt" Type="datetime" Precision="0" />
+          <Property Name="ExpireDt" Type="datetime" Precision="0" />
+          <Property Name="CancelDt" Type="datetime" Precision="0" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="RecStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="washingcardlog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="bigint" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CardNo" Type="varchar" MaxLength="20" />
+          <Property Name="LogDt" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="washingcardtype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Times" Type="int" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsCardNoLimit" Type="int" Nullable="false" />
+          <Property Name="CardNoLimitCount" Type="int" />
+          <Property Name="IsExpireLimt" Type="int" Nullable="false" />
+          <Property Name="YearExpireLimit" Type="int" />
+          <Property Name="MonthExpireLimit" Type="int" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityContainer Name="CarHealthModelStoreContainer">
+          <EntitySet Name="article" EntityType="Self.article" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="caraccessoryitem" EntityType="Self.caraccessoryitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="carserviceitem" EntityType="Self.carserviceitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="cartype" EntityType="Self.cartype" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="discountscheme" EntityType="Self.discountscheme" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="discountschemeitem" EntityType="Self.discountschemeitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="favourablescheme" EntityType="Self.favourablescheme" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="repairrecordevaluate" EntityType="Self.repairrecordevaluate" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="systemdict" EntityType="Self.systemdict" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="systemsetting" EntityType="Self.systemsetting" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="usercar" EntityType="Self.usercar" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="usercarrefuel" EntityType="Self.usercarrefuel" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="usercarrepairrecord" EntityType="Self.usercarrepairrecord" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="usercarrepairrecorditem" EntityType="Self.usercarrepairrecorditem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="usercarrepairrecordpic" EntityType="Self.usercarrepairrecordpic" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="userfavorit" EntityType="Self.userfavorit" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendor" EntityType="Self.vendor" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorbill" EntityType="Self.vendorbill" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorbillitem" EntityType="Self.vendorbillitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorcaraccessoryitem" EntityType="Self.vendorcaraccessoryitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorcard" EntityType="Self.vendorcard" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorcardlog" EntityType="Self.vendorcardlog" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorcardtype" EntityType="Self.vendorcardtype" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorcarserviceitem" EntityType="Self.vendorcarserviceitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendoremployee" EntityType="Self.vendoremployee" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorfunc" EntityType="Self.vendorfunc" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendororder" EntityType="Self.vendororder" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendororderitem" EntityType="Self.vendororderitem" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorpic" EntityType="Self.vendorpic" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendorservice" EntityType="Self.vendorservice" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendortag" EntityType="Self.vendortag" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendortagsource" EntityType="Self.vendortagsource" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendoruser" EntityType="Self.vendoruser" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendoruserrole" EntityType="Self.vendoruserrole" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="vendoruserrolefunc" EntityType="Self.vendoruserrolefunc" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="washingcard" EntityType="Self.washingcard" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="washingcardlog" EntityType="Self.washingcardlog" Schema="carhealth" store:Type="Tables" />
+          <EntitySet Name="washingcardtype" EntityType="Self.washingcardtype" Schema="carhealth" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarHealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TitlePicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IssueDt" Type="DateTime" />
+          <Property Name="VendorId" Type="Int64" />
+          <Property Name="ViewCount" Type="Int32" />
+          <Property Name="ReviewCount" Type="Int32" />
+          <Property Name="IsRecommend" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="RecommendDt" Type="DateTime" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CarAccessoryItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NamePinyin" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IsCommon" Type="Boolean" />
+          <Property Name="IsCommon" Type="Int32" />
           <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarServiceItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NamePinyin" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsCommon" Type="Int32" />
+          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandFirstLetter" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MfgrName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarTypeYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Specification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BrandCountry" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Technology" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GasDisplacement" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GearBox" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiscountScheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiscountSchemeItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchemeId" Type="Int64" Nullable="false" />
+          <Property Name="ServiceItemId" Type="Int64" />
+          <Property Name="AccessoryItemId" Type="Int64" />
+          <Property Name="DiscountType" Type="Int32" />
+          <Property Name="DiscountRate" Type="Int32" />
+          <Property Name="DiscountPrice" Type="Decimal" />
+          <Property Name="Member" Type="Decimal" />
+        </EntityType>
+        <EntityType Name="FavourableScheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDt" Type="DateTime" />
+          <Property Name="EndDt" Type="DateTime" />
+          <Property Name="CustomerRange" Type="Int32" Nullable="false" />
+          <Property Name="CardTypeIds" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="DiscountSchemeId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="RepairRecordEvaluate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="RecordId" Type="Int64" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemDict">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -180,16 +755,103 @@
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
           <Property Name="AvatarUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="UserCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="CarTypeId" Type="Int64" />
+          <Property Name="CarNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FrameNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EngineNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LicenseNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Int32" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCarRefuel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="RefuelDt" Type="DateTime" />
+          <Property Name="Mileage" Type="Int32" />
+          <Property Name="FuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FuelAmmount" Type="Decimal" />
+          <Property Name="UnitPrice" Type="Decimal" />
+          <Property Name="TotalCost" Type="Decimal" />
+          <Property Name="SurplusMileage" Type="Int32" />
+          <Property Name="SurplusAmmount" Type="Decimal" />
+          <Property Name="StationBrand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefuelPlace" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCarRepairRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserCarId" Type="Int64" Nullable="false" />
+          <Property Name="IsManul" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int64" />
+          <Property Name="RepairDt" Type="DateTime" />
+          <Property Name="RepairPlace" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cost" Type="Decimal" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCarRepairRecordItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecordId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" />
+          <Property Name="Quantity" Type="Decimal" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCarRepairRecordPic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecordId" Type="Int64" Nullable="false" />
+          <Property Name="PicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFavorit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="LinkerId" Type="Int64" Nullable="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Vendor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="Category" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -199,19 +861,202 @@
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
-          <Property Name="GroupId" Type="Int64" />
-          <Property Name="PicUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="VendorGroup">
+        <EntityType Name="VendorBill">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="OrderId" Type="Int64" />
+          <Property Name="VendorCardId" Type="Int64" />
+          <Property Name="FavourableSchemeId" Type="Int64" />
+          <Property Name="BillDt" Type="DateTime" Nullable="false" />
+          <Property Name="PayPattern" Type="Int64" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" />
+          <Property Name="RealCost" Type="Decimal" />
+          <Property Name="IsDiscount" Type="Int32" />
+          <Property Name="IsManualDiscount" Type="Int32" />
+          <Property Name="ManualDiscountAmmount" Type="Decimal" />
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorBillItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillId" Type="Int64" Nullable="false" />
+          <Property Name="OrderItemId" Type="Int64" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" />
+          <Property Name="RealCost" Type="Decimal" />
+          <Property Name="IsDiscount" Type="Int32" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStaus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorCarAccessoryItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NamePinyin" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" />
+          <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsCommon" Type="Int32" />
+          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="TypeId" Type="Int64" Nullable="false" />
+          <Property Name="CustomerCellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CardNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" />
+          <Property Name="Credits" Type="Int32" />
+          <Property Name="IssueDt" Type="DateTime" />
+          <Property Name="LatestUseDt" Type="DateTime" />
+          <Property Name="CancelDt" Type="DateTime" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorCardLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Money" Type="Decimal" />
+          <Property Name="Credits" Type="Int32" />
+          <Property Name="LogDt" Type="DateTime" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RechargePattern" Type="Int64" />
+        </EntityType>
+        <EntityType Name="VendorCardType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsRechargable" Type="Int32" Nullable="false" />
+          <Property Name="RechargeRate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDiscountable" Type="Int32" Nullable="false" />
+          <Property Name="DiscountSchemeId" Type="Int64" />
+          <Property Name="NextCardTypeId" Type="Int64" />
+          <Property Name="NextCardTypeCredits" Type="Int32" />
+          <Property Name="IsOnlineSelfService" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VendorCarServiceItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NamePinyin" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" />
+          <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsCommon" Type="Int32" />
+          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorEmployee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Speciality" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VendorFunc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VendorOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="CustomerCellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CustomCarNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VendorCardId" Type="Int64" />
+          <Property Name="RepairDt" Type="DateTime" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cost" Type="Decimal" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorOrderItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int64" Nullable="false" />
+          <Property Name="RepairType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemType" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int64" />
+          <Property Name="Cost" Type="Decimal" />
+          <Property Name="Quantity" Type="Decimal" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorPic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VendorEmployeeId" Type="Int64" />
+          <Property Name="VendorServiceId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="VendorService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VendorTag">
           <Key>
@@ -220,25 +1065,194 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendorId" Type="Int64" Nullable="false" />
           <Property Name="TagId" Type="Int64" Nullable="false" />
+          <Property Name="Sort" Type="Int32" />
         </EntityType>
         <EntityType Name="VendorTagSource">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="PicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityType Name="VendorUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="RoleId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LatestLoginDt" Type="DateTime" />
+          <Property Name="LatestLoginIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VendorUserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VendorUserRoleFunc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="RoleId" Type="Int64" Nullable="false" />
+          <Property Name="FuncId" Type="Int64" Nullable="false" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WashingCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="CardTypeId" Type="Int64" Nullable="false" />
+          <Property Name="CardNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerCellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Int32" Nullable="false" />
+          <Property Name="IssueDt" Type="DateTime" />
+          <Property Name="LatestUseDt" Type="DateTime" />
+          <Property Name="ExpireDt" Type="DateTime" />
+          <Property Name="CancelDt" Type="DateTime" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WashingCardLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CardNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LogDt" Type="DateTime" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WashingCardType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Times" Type="Int32" Nullable="false" />
+          <Property Name="Money" Type="Decimal" Nullable="false" />
+          <Property Name="IsCardNoLimit" Type="Int32" Nullable="false" />
+          <Property Name="CardNoLimitCount" Type="Int32" />
+          <Property Name="IsExpireLimt" Type="Int32" Nullable="false" />
+          <Property Name="YearExpireLimit" Type="Int32" />
+          <Property Name="MonthExpireLimit" Type="Int32" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="CarHealthEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articles" EntityType="CarHealthModel.Article" />
+          <EntitySet Name="CarAccessoryItems" EntityType="CarHealthModel.CarAccessoryItem" />
+          <EntitySet Name="CarServiceItems" EntityType="CarHealthModel.CarServiceItem" />
+          <EntitySet Name="CarTypes" EntityType="CarHealthModel.CarType" />
+          <EntitySet Name="DiscountSchemes" EntityType="CarHealthModel.DiscountScheme" />
+          <EntitySet Name="DiscountSchemeItems" EntityType="CarHealthModel.DiscountSchemeItem" />
+          <EntitySet Name="FavourableSchemes" EntityType="CarHealthModel.FavourableScheme" />
+          <EntitySet Name="RepairRecordEvaluates" EntityType="CarHealthModel.RepairRecordEvaluate" />
+          <EntitySet Name="SystemDicts" EntityType="CarHealthModel.SystemDict" />
+          <EntitySet Name="SystemSettings" EntityType="CarHealthModel.SystemSetting" />
+          <EntitySet Name="Users" EntityType="CarHealthModel.User" />
+          <EntitySet Name="UserCars" EntityType="CarHealthModel.UserCar" />
+          <EntitySet Name="UserCarRefuels" EntityType="CarHealthModel.UserCarRefuel" />
+          <EntitySet Name="UserCarRepairRecords" EntityType="CarHealthModel.UserCarRepairRecord" />
+          <EntitySet Name="UserCarRepairRecordItems" EntityType="CarHealthModel.UserCarRepairRecordItem" />
+          <EntitySet Name="UserCarRepairRecordPics" EntityType="CarHealthModel.UserCarRepairRecordPic" />
+          <EntitySet Name="UserFavorits" EntityType="CarHealthModel.UserFavorit" />
+          <EntitySet Name="Vendors" EntityType="CarHealthModel.Vendor" />
+          <EntitySet Name="VendorBills" EntityType="CarHealthModel.VendorBill" />
+          <EntitySet Name="VendorBillItems" EntityType="CarHealthModel.VendorBillItem" />
+          <EntitySet Name="VendorCarAccessoryItems" EntityType="CarHealthModel.VendorCarAccessoryItem" />
+          <EntitySet Name="VendorCards" EntityType="CarHealthModel.VendorCard" />
+          <EntitySet Name="VendorCardLogs" EntityType="CarHealthModel.VendorCardLog" />
+          <EntitySet Name="VendorCardTypes" EntityType="CarHealthModel.VendorCardType" />
+          <EntitySet Name="VendorCarServiceItems" EntityType="CarHealthModel.VendorCarServiceItem" />
+          <EntitySet Name="VendorEmployees" EntityType="CarHealthModel.VendorEmployee" />
+          <EntitySet Name="VendorFuncs" EntityType="CarHealthModel.VendorFunc" />
+          <EntitySet Name="VendorOrders" EntityType="CarHealthModel.VendorOrder" />
+          <EntitySet Name="VendorOrderItems" EntityType="CarHealthModel.VendorOrderItem" />
+          <EntitySet Name="VendorPics" EntityType="CarHealthModel.VendorPic" />
+          <EntitySet Name="VendorServices" EntityType="CarHealthModel.VendorService" />
+          <EntitySet Name="VendorTags" EntityType="CarHealthModel.VendorTag" />
+          <EntitySet Name="VendorTagSources" EntityType="CarHealthModel.VendorTagSource" />
+          <EntitySet Name="VendorUsers" EntityType="CarHealthModel.VendorUser" />
+          <EntitySet Name="VendorUserRoles" EntityType="CarHealthModel.VendorUserRole" />
+          <EntitySet Name="VendorUserRoleFuncs" EntityType="CarHealthModel.VendorUserRoleFunc" />
+          <EntitySet Name="WashingCards" EntityType="CarHealthModel.WashingCard" />
+          <EntitySet Name="WashingCardLogs" EntityType="CarHealthModel.WashingCardLog" />
+          <EntitySet Name="WashingCardTypes" EntityType="CarHealthModel.WashingCardType" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CarHealthModelStoreContainer" CdmEntityContainer="CarHealthEntities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="CarHealthModel.Article">
+              <MappingFragment StoreEntitySet="article">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TitlePicUrl" ColumnName="TitlePicUrl" />
+                <ScalarProperty Name="IssueDt" ColumnName="IssueDt" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="ReviewCount" ColumnName="ReviewCount" />
+                <ScalarProperty Name="IsRecommend" ColumnName="IsRecommend" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="RecommendDt" ColumnName="RecommendDt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarAccessoryItems">
+            <EntityTypeMapping TypeName="CarHealthModel.CarAccessoryItem">
+              <MappingFragment StoreEntitySet="caraccessoryitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NamePinyin" ColumnName="NamePinyin" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
+                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarServiceItems">
+            <EntityTypeMapping TypeName="CarHealthModel.CarServiceItem">
+              <MappingFragment StoreEntitySet="carserviceitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NamePinyin" ColumnName="NamePinyin" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
+                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CarTypes">
             <EntityTypeMapping TypeName="CarHealthModel.CarType">
               <MappingFragment StoreEntitySet="cartype">
@@ -259,93 +1273,526 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CarRepairItems">
-            <EntityTypeMapping TypeName="CarHealthModel.CarRepairItem">
-              <MappingFragment StoreEntitySet="carrepairitem">
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
-                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
-                <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
-                <ScalarProperty Name="Memo" ColumnName="Memo" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
+          <EntitySetMapping Name="DiscountSchemes">
+            <EntityTypeMapping TypeName="CarHealthModel.DiscountScheme">
+              <MappingFragment StoreEntitySet="discountscheme">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscountSchemeItems">
+            <EntityTypeMapping TypeName="CarHealthModel.DiscountSchemeItem">
+              <MappingFragment StoreEntitySet="discountschemeitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SchemeId" ColumnName="SchemeId" />
+                <ScalarProperty Name="ServiceItemId" ColumnName="ServiceItemId" />
+                <ScalarProperty Name="AccessoryItemId" ColumnName="AccessoryItemId" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="Member" ColumnName="Member" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FavourableSchemes">
+            <EntityTypeMapping TypeName="CarHealthModel.FavourableScheme">
+              <MappingFragment StoreEntitySet="favourablescheme">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartDt" ColumnName="StartDt" />
+                <ScalarProperty Name="EndDt" ColumnName="EndDt" />
+                <ScalarProperty Name="CustomerRange" ColumnName="CustomerRange" />
+                <ScalarProperty Name="CardTypeIds" ColumnName="CardTypeIds" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DiscountSchemeId" ColumnName="DiscountSchemeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepairRecordEvaluates">
+            <EntityTypeMapping TypeName="CarHealthModel.RepairRecordEvaluate">
+              <MappingFragment StoreEntitySet="repairrecordevaluate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemDicts">
+            <EntityTypeMapping TypeName="CarHealthModel.SystemDict">
+              <MappingFragment StoreEntitySet="systemdict">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemSettings">
+            <EntityTypeMapping TypeName="CarHealthModel.SystemSetting">
+              <MappingFragment StoreEntitySet="systemsetting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CarHealthModel.User">
               <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="LatestLoginIp" ColumnName="LatestLoginIp" />
-                <ScalarProperty Name="LatestLoginDt" ColumnName="LatestLoginDt" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LatestLoginDt" ColumnName="LatestLoginDt" />
+                <ScalarProperty Name="LatestLoginIp" ColumnName="LatestLoginIp" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCars">
+            <EntityTypeMapping TypeName="CarHealthModel.UserCar">
+              <MappingFragment StoreEntitySet="usercar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+                <ScalarProperty Name="CarNo" ColumnName="CarNo" />
+                <ScalarProperty Name="FrameNo" ColumnName="FrameNo" />
+                <ScalarProperty Name="EngineNo" ColumnName="EngineNo" />
+                <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCarRefuels">
+            <EntityTypeMapping TypeName="CarHealthModel.UserCarRefuel">
+              <MappingFragment StoreEntitySet="usercarrefuel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RefuelDt" ColumnName="RefuelDt" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+                <ScalarProperty Name="FuelAmmount" ColumnName="FuelAmmount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="SurplusMileage" ColumnName="SurplusMileage" />
+                <ScalarProperty Name="SurplusAmmount" ColumnName="SurplusAmmount" />
+                <ScalarProperty Name="StationBrand" ColumnName="StationBrand" />
+                <ScalarProperty Name="RefuelPlace" ColumnName="RefuelPlace" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCarRepairRecords">
+            <EntityTypeMapping TypeName="CarHealthModel.UserCarRepairRecord">
+              <MappingFragment StoreEntitySet="usercarrepairrecord">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserCarId" ColumnName="UserCarId" />
+                <ScalarProperty Name="IsManul" ColumnName="IsManul" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="RepairDt" ColumnName="RepairDt" />
+                <ScalarProperty Name="RepairPlace" ColumnName="RepairPlace" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCarRepairRecordItems">
+            <EntityTypeMapping TypeName="CarHealthModel.UserCarRepairRecordItem">
+              <MappingFragment StoreEntitySet="usercarrepairrecorditem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCarRepairRecordPics">
+            <EntityTypeMapping TypeName="CarHealthModel.UserCarRepairRecordPic">
+              <MappingFragment StoreEntitySet="usercarrepairrecordpic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFavorits">
+            <EntityTypeMapping TypeName="CarHealthModel.UserFavorit">
+              <MappingFragment StoreEntitySet="userfavorit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="LinkerId" ColumnName="LinkerId" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="CarHealthModel.Vendor">
               <MappingFragment StoreEntitySet="vendor">
-                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
-                <ScalarProperty Name="Memo" ColumnName="Memo" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VendorGroups">
-            <EntityTypeMapping TypeName="CarHealthModel.VendorGroup">
-              <MappingFragment StoreEntitySet="vendorgroup">
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+          <EntitySetMapping Name="VendorBills">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorBill">
+              <MappingFragment StoreEntitySet="vendorbill">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="VendorCardId" ColumnName="VendorCardId" />
+                <ScalarProperty Name="FavourableSchemeId" ColumnName="FavourableSchemeId" />
+                <ScalarProperty Name="BillDt" ColumnName="BillDt" />
+                <ScalarProperty Name="PayPattern" ColumnName="PayPattern" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="RealCost" ColumnName="RealCost" />
+                <ScalarProperty Name="IsDiscount" ColumnName="IsDiscount" />
+                <ScalarProperty Name="IsManualDiscount" ColumnName="IsManualDiscount" />
+                <ScalarProperty Name="ManualDiscountAmmount" ColumnName="ManualDiscountAmmount" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorBillItems">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorBillItem">
+              <MappingFragment StoreEntitySet="vendorbillitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BillId" ColumnName="BillId" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="RealCost" ColumnName="RealCost" />
+                <ScalarProperty Name="IsDiscount" ColumnName="IsDiscount" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStaus" ColumnName="RecStaus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorCarAccessoryItems">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorCarAccessoryItem">
+              <MappingFragment StoreEntitySet="vendorcaraccessoryitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NamePinyin" ColumnName="NamePinyin" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
+                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorCards">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorCard">
+              <MappingFragment StoreEntitySet="vendorcard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CustomerCellphone" ColumnName="CustomerCellphone" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="IssueDt" ColumnName="IssueDt" />
+                <ScalarProperty Name="LatestUseDt" ColumnName="LatestUseDt" />
+                <ScalarProperty Name="CancelDt" ColumnName="CancelDt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorCardLogs">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorCardLog">
+              <MappingFragment StoreEntitySet="vendorcardlog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="LogDt" ColumnName="LogDt" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RechargePattern" ColumnName="RechargePattern" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorCardTypes">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorCardType">
+              <MappingFragment StoreEntitySet="vendorcardtype">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsRechargable" ColumnName="IsRechargable" />
+                <ScalarProperty Name="RechargeRate" ColumnName="RechargeRate" />
+                <ScalarProperty Name="IsDiscountable" ColumnName="IsDiscountable" />
+                <ScalarProperty Name="DiscountSchemeId" ColumnName="DiscountSchemeId" />
+                <ScalarProperty Name="NextCardTypeId" ColumnName="NextCardTypeId" />
+                <ScalarProperty Name="NextCardTypeCredits" ColumnName="NextCardTypeCredits" />
+                <ScalarProperty Name="IsOnlineSelfService" ColumnName="IsOnlineSelfService" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorCarServiceItems">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorCarServiceItem">
+              <MappingFragment StoreEntitySet="vendorcarserviceitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NamePinyin" ColumnName="NamePinyin" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
+                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorEmployees">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorEmployee">
+              <MappingFragment StoreEntitySet="vendoremployee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Speciality" ColumnName="Speciality" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorFuncs">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorFunc">
+              <MappingFragment StoreEntitySet="vendorfunc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorOrders">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorOrder">
+              <MappingFragment StoreEntitySet="vendororder">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="CustomerCellphone" ColumnName="CustomerCellphone" />
+                <ScalarProperty Name="CustomCarNo" ColumnName="CustomCarNo" />
+                <ScalarProperty Name="VendorCardId" ColumnName="VendorCardId" />
+                <ScalarProperty Name="RepairDt" ColumnName="RepairDt" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorOrderItems">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorOrderItem">
+              <MappingFragment StoreEntitySet="vendororderitem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="RepairType" ColumnName="RepairType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorPics">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorPic">
+              <MappingFragment StoreEntitySet="vendorpic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="VendorEmployeeId" ColumnName="VendorEmployeeId" />
+                <ScalarProperty Name="VendorServiceId" ColumnName="VendorServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorServices">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorService">
+              <MappingFragment StoreEntitySet="vendorservice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorTags">
             <EntityTypeMapping TypeName="CarHealthModel.VendorTag">
               <MappingFragment StoreEntitySet="vendortag">
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VendorTagSources">
             <EntityTypeMapping TypeName="CarHealthModel.VendorTagSource">
               <MappingFragment StoreEntitySet="vendortagsource">
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
-                <ScalarProperty Name="Memo" ColumnName="Memo" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorUsers">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorUser">
+              <MappingFragment StoreEntitySet="vendoruser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LatestLoginDt" ColumnName="LatestLoginDt" />
+                <ScalarProperty Name="LatestLoginIp" ColumnName="LatestLoginIp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorUserRoles">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorUserRole">
+              <MappingFragment StoreEntitySet="vendoruserrole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorUserRoleFuncs">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorUserRoleFunc">
+              <MappingFragment StoreEntitySet="vendoruserrolefunc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FuncId" ColumnName="FuncId" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WashingCards">
+            <EntityTypeMapping TypeName="CarHealthModel.WashingCard">
+              <MappingFragment StoreEntitySet="washingcard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="CardTypeId" ColumnName="CardTypeId" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="CustomerCellphone" ColumnName="CustomerCellphone" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="IssueDt" ColumnName="IssueDt" />
+                <ScalarProperty Name="LatestUseDt" ColumnName="LatestUseDt" />
+                <ScalarProperty Name="ExpireDt" ColumnName="ExpireDt" />
+                <ScalarProperty Name="CancelDt" ColumnName="CancelDt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WashingCardLogs">
+            <EntityTypeMapping TypeName="CarHealthModel.WashingCardLog">
+              <MappingFragment StoreEntitySet="washingcardlog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="LogDt" ColumnName="LogDt" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WashingCardTypes">
+            <EntityTypeMapping TypeName="CarHealthModel.WashingCardType">
+              <MappingFragment StoreEntitySet="washingcardtype">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="IsCardNoLimit" ColumnName="IsCardNoLimit" />
+                <ScalarProperty Name="CardNoLimitCount" ColumnName="CardNoLimitCount" />
+                <ScalarProperty Name="IsExpireLimt" ColumnName="IsExpireLimt" />
+                <ScalarProperty Name="YearExpireLimit" ColumnName="YearExpireLimit" />
+                <ScalarProperty Name="MonthExpireLimit" ColumnName="MonthExpireLimit" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -363,11 +1810,10 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
-        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
