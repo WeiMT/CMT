@@ -54,6 +54,7 @@ namespace User.Service.Pipeline.Filters
 
                 if (cookie != null)
                 {
+                    //此处系统会自动UrlDecode
                     var token = cookie["AzuCookie"].Value;
 
                     var userId = 0L;

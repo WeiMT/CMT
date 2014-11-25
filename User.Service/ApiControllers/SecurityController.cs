@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Runtime.Caching;
 using System.ServiceModel.Channels;
+using System.Threading;
 using System.Web;
 using System.Web.Http;
 using DataAccess.Models;
@@ -17,9 +21,6 @@ namespace User.Service.ApiControllers
 {
     public class SecurityController :ApiController
     {
-        private const string TokenSignKey = "jasidjfaois09080m5tyuit";
-        private const string TokenEncryptKey = "ythgbinhuimkdiny";
-
         ///// <summary>
         ///// 匿名注册，达到用户在尚未注册时，也能保存数据
         ///// 成功后客户端需要保存匿名令牌
@@ -86,8 +87,9 @@ namespace User.Service.ApiControllers
 
             for (int i = 0; i < 6; i++)
             {
-                var rd = new Random(DateTime.Now.Millisecond + (10*i));
+                var rd = new Random();
                 verifyCode += rd.Next(0, 9);
+                Thread.Sleep(1);
             }
 
             MemoryCache.Default.Set(cellphone, verifyCode, DateTimeOffset.Now.AddMinutes(10));
@@ -116,11 +118,14 @@ namespace User.Service.ApiControllers
         /// 注册/登录
         /// 成功后，客户端应该保存令牌
         /// </summary>
+        /// <param name="reqData">
+        /// {"Cellphone":"18070037088","VerifyCode":"990980"}
+        /// </param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ActionName("RegLogin")]
-        public dynamic RegLogin(JObject reqData)
+        public HttpResponseMessage RegLogin(JObject reqData)
         {
             var cellphone = reqData["Cellphone"].ToObject<string>();
             var code = reqData["VerifyCode"].ToObject<string>();
@@ -128,11 +133,16 @@ namespace User.Service.ApiControllers
             var memoCode = MemoryCache.Default.Get(cellphone);
             if (memoCode == null || code != memoCode.ToString())
             {
-                return new
+                var resp = new HttpResponseMessage();
+                resp.Content = new ObjectContent<dynamic>(
+                new
                 {
                     ResultCode = "1",
                     ResultMsg = "验证码错误或已过期，请重新获取"
-                };
+                },
+                new JsonMediaTypeFormatter());
+
+                return resp;
             }
 
             using (var ctx = new CarHealthEntities())
@@ -173,19 +183,22 @@ namespace User.Service.ApiControllers
 
                 var userId = user.Id;
 
-                var dicts = new Dictionary<string, string>();
-                dicts.Add("Id", userId.ToString());
-
-                var token = new TokenBuilder(TokenSignKey).Build(dicts);
-                var encryptToken = AesHelper.Encrypt(token, TokenEncryptKey);
-
-                return new
+                var resp = new HttpResponseMessage();
+                resp.Content = new ObjectContent<dynamic>(
+                new
                 {
                     ResultCode = "0",
                     ResultMsg = "",
-                    UserType = user.Type,
-                    Token = encryptToken
-                };
+                    UserType = user.Type
+                },
+                new JsonMediaTypeFormatter());
+
+                var cookie = new CookieHeaderValue("AzuCookie", LocalUserTokenHelper.GenerateLocalToken(userId));                
+                cookie.Domain = Request.RequestUri.Host;
+                cookie.Path = "/";
+                resp.Headers.AddCookies(new [] { cookie });
+
+                return resp;
             }
         }
 
