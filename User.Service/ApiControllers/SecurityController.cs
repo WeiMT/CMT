@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
+using System.ServiceModel.Channels;
+using System.Web;
 using System.Web.Http;
 using DataAccess.Models;
 using Newtonsoft.Json;
@@ -50,20 +53,23 @@ namespace User.Service.ApiControllers
 
         //        return new
         //        {
-        //            IsAnonymous = 1,
+        //            UserType = 1,
         //            Token = encryptToken
         //        };
         //    }
         //}
 
         /// <summary>
-        /// 发送注册验证码，验证码有效期10分钟
+        /// 发送注册/登录验证码，验证码有效期10分钟
         /// </summary>
+        ///<param name="reqData">
+        /// {"Cellphone":"18070037088"}
+        /// </param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        [ActionName("SendSmsRegisterCode")]
-        public dynamic SendSmsRegisterCode(JObject reqData)
+        [ActionName("SendSmsRegLoginCode")]
+        public dynamic SendSmsRegLoginCode(JObject reqData)
         {
             var cellphone = reqData["Cellphone"].ToObject<string>().Trim();
 
@@ -75,7 +81,7 @@ namespace User.Service.ApiControllers
                     ResultMsg = "手机号码格式不正确"
                 };
             }
-
+            
             var verifyCode = "";
 
             for (int i = 0; i < 6; i++)
@@ -92,7 +98,7 @@ namespace User.Service.ApiControllers
                 userName = "itdept",
                 password = "123456",
                 phoneNumber = cellphone,
-                content = "您的注册码为" + verifyCode,
+                content = "您的验证码为" + verifyCode +",验证码有效期为10分钟",
                 source = "8",
                 externalId = "外部id"
             };
@@ -107,28 +113,80 @@ namespace User.Service.ApiControllers
         }
 
         /// <summary>
-        /// 注册用户
-        /// 注册成功后，客户端应该保存注册后的令牌
+        /// 注册/登录
+        /// 成功后，客户端应该保存令牌
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        [ActionName("Register")]
-        public dynamic Register(JObject reqData)
+        [ActionName("RegLogin")]
+        public dynamic RegLogin(JObject reqData)
         {
-            return null;
-        }
+            var cellphone = reqData["Cellphone"].ToObject<string>();
+            var code = reqData["VerifyCode"].ToObject<string>();
 
-        /// <summary>
-        /// 注册用户登录
-        /// </summary>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost]
-        [ActionName("Login")]
-        public dynamic Login()
-        {
-            return null;
+            var memoCode = MemoryCache.Default.Get(cellphone);
+            if (memoCode == null || code != memoCode.ToString())
+            {
+                return new
+                {
+                    ResultCode = "1",
+                    ResultMsg = "验证码错误或已过期，请重新获取"
+                };
+            }
+
+            using (var ctx = new CarHealthEntities())
+            {
+                var user = ctx.Users.FirstOrDefault(x => x.Cellphone == cellphone);
+
+                if (user == null)
+                {
+                    user = new DataAccess.Models.User
+                    {
+                        Cellphone = cellphone,
+                        Type = 2,
+                        LatestLoginDt = DateTime.Now,
+                        LatestLoginIp = CommonHelper.GetClientIp(Request),
+                        RecCreateDt = DateTime.Now,
+                        RecStatus = 1
+                    };
+
+                    ctx.Users.Add(user);
+
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    //预注册用户，升级为注册用户
+                    if (user.Type == 4)
+                    {
+                        user.Type = 2;
+                    }
+
+                    user.LatestLoginDt = DateTime.Now;
+                    user.LatestLoginDt = DateTime.Now;
+                    user.LatestLoginIp = CommonHelper.GetClientIp(Request);
+                    user.RecStatus = 1;
+
+                    ctx.SaveChanges();
+                }
+
+                var userId = user.Id;
+
+                var dicts = new Dictionary<string, string>();
+                dicts.Add("Id", userId.ToString());
+
+                var token = new TokenBuilder(TokenSignKey).Build(dicts);
+                var encryptToken = AesHelper.Encrypt(token, TokenEncryptKey);
+
+                return new
+                {
+                    ResultCode = "0",
+                    ResultMsg = "",
+                    UserType = user.Type,
+                    Token = encryptToken
+                };
+            }
         }
 
         /// <summary>
@@ -140,6 +198,6 @@ namespace User.Service.ApiControllers
         public dynamic Logout()
         {
             return null;
-        }
+        }        
     }
 }
