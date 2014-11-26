@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="CarHealthModel.UserCarRepairRecordItem" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.UserCarRepairRecordPic" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.UserFavorit" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarHealthModel.Vendor" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.VendorBill" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.VendorBillItem" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.VendorCarAccessoryItem" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
@@ -44,6 +43,7 @@
         <EntityTypeShape EntityType="CarHealthModel.WashingCard" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.WashingCardLog" Width="1.5" PointX="2.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.WashingCardType" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHealthModel.Vendor" Width="1.5" PointX="11.375" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

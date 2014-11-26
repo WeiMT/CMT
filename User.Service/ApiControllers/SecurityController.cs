@@ -16,6 +16,8 @@ using DataAccess.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using User.Service.Helpers;
+using User.Service.Sdk.AutoNavi;
+using User.Service.Sdk.AutoNavi.Dto.Store;
 
 namespace User.Service.ApiControllers
 {
@@ -66,7 +68,14 @@ namespace User.Service.ApiControllers
         ///<param name="reqData">
         /// {"Cellphone":"18070037088"}
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// {
+        ///     //0为成功，其它为失败
+        ///     ResultCode = "1",
+        ///     //失败时显示，失败原因
+        ///     ResultMsg = "手机号码格式不正确"
+        /// }
+        /// </returns>
         [AllowAnonymous]
         [HttpPost]
         [ActionName("SendSmsRegLoginCode")]
@@ -121,7 +130,17 @@ namespace User.Service.ApiControllers
         /// <param name="reqData">
         /// {"Cellphone":"18070037088","VerifyCode":"990980"}
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// 成功时，访问令牌下发在Cookie中，AzuCookie
+        /// {
+        ///     //0为成功，其它为失败
+        ///     ResultCode = "0",
+        ///     //失败时显示失败原因
+        ///     ResultMsg = "",
+        ///     //成功时有值，1匿名用户，2注册用户，3VIP用户，4预注册用户；
+        ///     UserType = user.Type
+        /// }
+        /// </returns>
         [AllowAnonymous]
         [HttpPost]
         [ActionName("RegLogin")]
@@ -211,6 +230,40 @@ namespace User.Service.ApiControllers
         public dynamic Logout()
         {
             return null;
-        }        
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public dynamic TestAMap()
+        {
+            YuntuCreateDataTest();
+
+            return null;
+        }
+
+        private void YuntuCreateDataTest()
+        {
+            var request = new CreateDataRequest
+            {
+                TableId = Tables.VendorTableId,
+                LocType = 1,
+                CreateData = new CreateDataRequest.Data
+                {
+                    Name = "南昌八一洗车店",
+                    Category = "洗车",
+                    Address = "南昌八一大道545号",
+                    CoordType = "autonavi",
+                    CarServiceTag = "清洗;贴膜",
+                    UserServiceTag = "折;卡",
+                    Location = "115.90353,28.683058",
+                    DealCount = 1,
+                    PraiseCount = 0,
+                    VendorId = 12,
+                    PicUrl = "http://"
+                }
+            };
+
+            var response = YuntuStore.CreateData(request);
+        }
     }
 }

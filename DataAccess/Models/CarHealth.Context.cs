@@ -42,7 +42,6 @@ namespace DataAccess.Models
         public virtual DbSet<UserCarRepairRecordItem> UserCarRepairRecordItems { get; set; }
         public virtual DbSet<UserCarRepairRecordPic> UserCarRepairRecordPics { get; set; }
         public virtual DbSet<UserFavorit> UserFavorits { get; set; }
-        public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorBill> VendorBills { get; set; }
         public virtual DbSet<VendorBillItem> VendorBillItems { get; set; }
         public virtual DbSet<VendorCarAccessoryItem> VendorCarAccessoryItems { get; set; }
@@ -64,5 +63,6 @@ namespace DataAccess.Models
         public virtual DbSet<WashingCard> WashingCards { get; set; }
         public virtual DbSet<WashingCardLog> WashingCardLogs { get; set; }
         public virtual DbSet<WashingCardType> WashingCardTypes { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
     }
 }

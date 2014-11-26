@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarHealthModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarHealthModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="article">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,7 +32,8 @@
           <Property Name="Unit" Type="varchar" MaxLength="10" />
           <Property Name="Memo" Type="varchar" MaxLength="500" />
           <Property Name="IsCommon" Type="int" />
-          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="IsCatalog" Type="int" />
+          <Property Name="ParentId" Type="bigint" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
         </EntityType>
@@ -41,13 +42,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NamePinyin" Type="varchar" MaxLength="500" />
-          <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Unit" Type="varchar" MaxLength="10" />
           <Property Name="Memo" Type="varchar" MaxLength="500" />
           <Property Name="IsCommon" Type="int" />
-          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="IsCatalog" Type="int" />
+          <Property Name="ParentId" Type="bigint" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
         </EntityType>
@@ -214,6 +216,7 @@
           <Property Name="RecordId" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="bigint" />
           <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Unit" Type="varchar" MaxLength="10" />
@@ -249,13 +252,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="2000" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
           <Property Name="Telephone" Type="varchar" MaxLength="20" />
           <Property Name="Cellphone" Type="varchar" MaxLength="20" />
+          <Property Name="LbsIds" Type="varchar" MaxLength="500" />
           <Property Name="Longitude" Type="varchar" MaxLength="20" />
           <Property Name="Latitude" Type="varchar" MaxLength="20" />
           <Property Name="ShortName" Type="varchar" MaxLength="50" />
@@ -309,7 +312,8 @@
           <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Memo" Type="varchar" MaxLength="500" />
           <Property Name="IsCommon" Type="int" />
-          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="IsCatalog" Type="int" />
+          <Property Name="ParentId" Type="bigint" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
         </EntityType>
@@ -373,7 +377,8 @@
           <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Memo" Type="varchar" MaxLength="500" />
           <Property Name="IsCommon" Type="int" />
-          <Property Name="SubSystem" Type="varchar" MaxLength="200" />
+          <Property Name="IsCatalog" Type="int" />
+          <Property Name="ParentId" Type="bigint" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
         </EntityType>
@@ -599,8 +604,7 @@
           <EntitySet Name="washingcardlog" EntityType="Self.washingcardlog" Schema="carhealth" store:Type="Tables" />
           <EntitySet Name="washingcardtype" EntityType="Self.washingcardtype" Schema="carhealth" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarHealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -631,9 +635,10 @@
           <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsCommon" Type="Int32" />
-          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsCatalog" Type="Int32" />
+          <Property Name="ParentId" Type="Int64" />
         </EntityType>
         <EntityType Name="CarServiceItem">
           <Key>
@@ -646,9 +651,10 @@
           <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsCommon" Type="Int32" />
-          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsCatalog" Type="Int32" />
+          <Property Name="ParentId" Type="Int64" />
         </EntityType>
         <EntityType Name="CarType">
           <Key>
@@ -820,6 +826,7 @@
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="Int64" />
         </EntityType>
         <EntityType Name="UserCarRepairRecordPic">
           <Key>
@@ -840,25 +847,6 @@
           <Property Name="UserId" Type="Int64" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="LinkerId" Type="Int64" Nullable="false" />
-          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
-          <Property Name="RecStatus" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Vendor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
         </EntityType>
@@ -908,9 +896,10 @@
           <Property Name="UnitPrice" Type="Decimal" />
           <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsCommon" Type="Int32" />
-          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsCatalog" Type="Int32" />
+          <Property Name="ParentId" Type="Int64" />
         </EntityType>
         <EntityType Name="VendorCard">
           <Key>
@@ -972,9 +961,10 @@
           <Property Name="UnitPrice" Type="Decimal" />
           <Property Name="Memo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsCommon" Type="Int32" />
-          <Property Name="SubSystem" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsCatalog" Type="Int32" />
+          <Property Name="ParentId" Type="Int64" />
         </EntityType>
         <EntityType Name="VendorEmployee">
           <Key>
@@ -1175,7 +1165,6 @@
           <EntitySet Name="UserCarRepairRecordItems" EntityType="CarHealthModel.UserCarRepairRecordItem" />
           <EntitySet Name="UserCarRepairRecordPics" EntityType="CarHealthModel.UserCarRepairRecordPic" />
           <EntitySet Name="UserFavorits" EntityType="CarHealthModel.UserFavorit" />
-          <EntitySet Name="Vendors" EntityType="CarHealthModel.Vendor" />
           <EntitySet Name="VendorBills" EntityType="CarHealthModel.VendorBill" />
           <EntitySet Name="VendorBillItems" EntityType="CarHealthModel.VendorBillItem" />
           <EntitySet Name="VendorCarAccessoryItems" EntityType="CarHealthModel.VendorCarAccessoryItem" />
@@ -1197,7 +1186,27 @@
           <EntitySet Name="WashingCards" EntityType="CarHealthModel.WashingCard" />
           <EntitySet Name="WashingCardLogs" EntityType="CarHealthModel.WashingCardLog" />
           <EntitySet Name="WashingCardTypes" EntityType="CarHealthModel.WashingCardType" />
+          <EntitySet Name="Vendors" EntityType="CarHealthModel.Vendor" />
         </EntityContainer>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LbsIds" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1225,13 +1234,14 @@
           <EntitySetMapping Name="CarAccessoryItems">
             <EntityTypeMapping TypeName="CarHealthModel.CarAccessoryItem">
               <MappingFragment StoreEntitySet="caraccessoryitem">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsCatalog" ColumnName="IsCatalog" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="NamePinyin" ColumnName="NamePinyin" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
                 <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
-                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
                 <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
                 <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
@@ -1240,6 +1250,8 @@
           <EntitySetMapping Name="CarServiceItems">
             <EntityTypeMapping TypeName="CarHealthModel.CarServiceItem">
               <MappingFragment StoreEntitySet="carserviceitem">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsCatalog" ColumnName="IsCatalog" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="NamePinyin" ColumnName="NamePinyin" />
@@ -1247,7 +1259,6 @@
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
                 <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
-                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
                 <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
                 <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
@@ -1422,6 +1433,7 @@
           <EntitySetMapping Name="UserCarRepairRecordItems">
             <EntityTypeMapping TypeName="CarHealthModel.UserCarRepairRecordItem">
               <MappingFragment StoreEntitySet="usercarrepairrecorditem">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RecordId" ColumnName="RecordId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1455,26 +1467,6 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LinkerId" ColumnName="LinkerId" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vendors">
-            <EntityTypeMapping TypeName="CarHealthModel.Vendor">
-              <MappingFragment StoreEntitySet="vendor">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="Memo" ColumnName="Memo" />
                 <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
                 <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
@@ -1519,6 +1511,8 @@
           <EntitySetMapping Name="VendorCarAccessoryItems">
             <EntityTypeMapping TypeName="CarHealthModel.VendorCarAccessoryItem">
               <MappingFragment StoreEntitySet="vendorcaraccessoryitem">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsCatalog" ColumnName="IsCatalog" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1527,7 +1521,6 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
                 <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
-                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
                 <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
                 <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
@@ -1586,6 +1579,8 @@
           <EntitySetMapping Name="VendorCarServiceItems">
             <EntityTypeMapping TypeName="CarHealthModel.VendorCarServiceItem">
               <MappingFragment StoreEntitySet="vendorcarserviceitem">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsCatalog" ColumnName="IsCatalog" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VendorId" ColumnName="VendorId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1595,7 +1590,6 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
                 <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
-                <ScalarProperty Name="SubSystem" ColumnName="SubSystem" />
                 <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
                 <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
               </MappingFragment>
@@ -1793,6 +1787,26 @@
                 <ScalarProperty Name="YearExpireLimit" ColumnName="YearExpireLimit" />
                 <ScalarProperty Name="MonthExpireLimit" ColumnName="MonthExpireLimit" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="CarHealthModel.Vendor">
+              <MappingFragment StoreEntitySet="vendor">
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="LbsIds" ColumnName="LbsIds" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

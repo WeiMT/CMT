@@ -15,13 +15,13 @@ namespace DataAccess.Models
     public partial class Vendor
     {
         public long Id { get; set; }
-        public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Type { get; set; }
         public string Address { get; set; }
         public string Telephone { get; set; }
         public string Cellphone { get; set; }
+        public string LbsIds { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string ShortName { get; set; }

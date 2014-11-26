@@ -20,8 +20,9 @@ namespace DataAccess.Models
         public string Unit { get; set; }
         public string Memo { get; set; }
         public Nullable<int> IsCommon { get; set; }
-        public string SubSystem { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
+        public Nullable<int> IsCatalog { get; set; }
+        public Nullable<long> ParentId { get; set; }
     }
 }
