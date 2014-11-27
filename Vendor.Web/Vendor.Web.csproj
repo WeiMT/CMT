@@ -185,6 +185,7 @@
     <Content Include="Views\VendorUsers\Details.cshtml" />
     <Content Include="Views\VendorUsers\Edit.cshtml" />
     <Content Include="Views\VendorUsers\Index.cshtml" />
+    <Content Include="Views\Home\TranPay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
