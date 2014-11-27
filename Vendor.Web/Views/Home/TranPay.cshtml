@@ -1,0 +1,111 @@
+﻿@model DataAccess.Models.VendorOrder
+
+<div class="bs-docs-header" id="content">
+    <div class="container">
+        <h1>车名堂 - 快速交易</h1>
+        <p> 登记 - 项目 - <mark>结算</mark> - 完成</p>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <div class="col-md-8">
+        <div class="row">
+            @using (Html.BeginForm())
+            {
+                <h4>订单详细</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-1">序号</th>
+                            <th class="col-xs-4">名称</th>
+                            <th class="col-xs-1">类型</th>
+                            <th class="col-xs-1">单位</th>
+                            <th class="col-xs-1">单价</th>
+                            <th class="col-xs-1">数量</th>
+                            <th class="col-xs-1">小计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h5>1</h5></td>
+                            <td><h5>车辆精洗</h5></td>
+                            <td><h5>服务</h5></td>
+                            <td><h5>次</h5></td>
+                            <td><h5>25.00</h5></td>
+                            <td><h5>1</h5></td>
+                            <td>@Html.EditorFor(model => model.CustomerCellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "25.00" } })</td>
+                        </tr>
+                        <tr>
+                            <td><h5>2</h5></td>
+                            <td><h5>#3修复剂</h5></td>
+                            <td><h5>配件</h5></td>
+                            <td><h5>瓶</h5></td>
+                            <td><h5>80.00</h5></td>
+                            <td><h5>0.25</h5></td>
+                            <td>@Html.EditorFor(model => model.CustomerCellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "20.00" } })</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-right"><h5>总价</h5></td>
+                            <td colspan="2">@Html.EditorFor(model => model.CustomerCellphone, new { htmlAttributes = new { @class = "form-control", @placeholder = "20.00" } })</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <h4>店内活动</h4>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-1">序号</th>
+                            <th class="col-xs-3">名称</th>
+                            <th class="col-xs-6">内容</th>
+                            <th class="col-xs-3"><input type="checkbox" class="form-control"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h5>1</h5></td>
+                            <td><h5>1年店庆</h5></td>
+                            <td><h5>所有项目8折</h5></td>
+                            <td><input type="checkbox" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td><h5>2</h5></td>
+                            <td><h5>洗车促销</h5></td>
+                            <td><h5>洗车8折</h5></td>
+                            <td><input type="checkbox" class="form-control"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>会员卡</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-1">所属</th>
+                            <th class="col-xs-2">类型 &middot; 折扣</th>
+                            <th class="col-xs-1">积分</th>
+                            <th class="col-xs-1">卡内余额</th>
+                            <th class="col-xs-1">是否折扣</th>
+                            <th class="col-xs-1">使用余额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h5>赣A12345</h5></td>
+                            <td><h5>白金卡 - 工时费八五折</h5></td>
+                            <td><h5>12049</h5></td>
+                            <td><h5>230</h5></td>
+                            <td><input type="checkbox" class="form-control"></td>
+                            <td><input type="checkbox" class="form-control"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

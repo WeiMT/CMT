@@ -15,9 +15,23 @@ namespace Vendor.Web.Controllers
             return View();
         }
 
+        public ActionResult TranPay()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult TranPay([Bind(Include = "CustomerCellphone, CustomCarNo")] DataAccess.Models.VendorOrder order)
+        {
+            return View(order);
+        }
         public ActionResult TranItem()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult TranItem([Bind(Include = "CustomerCellphone, CustomCarNo")] DataAccess.Models.VendorOrder order)
+        {
+            return View(order);
         }
 
 
