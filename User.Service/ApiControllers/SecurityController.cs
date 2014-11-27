@@ -12,6 +12,7 @@ using System.ServiceModel.Channels;
 using System.Threading;
 using System.Web;
 using System.Web.Http;
+using System.Web.UI.WebControls;
 using DataAccess.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -236,7 +237,7 @@ namespace User.Service.ApiControllers
         [HttpGet]
         public dynamic TestAMap()
         {
-            YuntuCreateDataTest();
+            YuntuDeleteDataTest();
 
             return null;
         }
@@ -264,6 +265,43 @@ namespace User.Service.ApiControllers
             };
 
             var response = YuntuStore.CreateData(request);
+        }
+
+        private void YuntuUpdateDataTest()
+        {
+            var request = new UpdateDataRequest
+            {
+                TableId = Tables.VendorTableId,
+                LocType = 1,
+                UpdateData = new UpdateDataRequest.Data
+                {
+                    Id="4",
+                    Name = "南昌八一大道洗车店",
+                    Category = "洗车",
+                    Address = "福州路11号",
+                    CoordType = "autonavi",
+                    CarServiceTag = "美容;贴膜;轮胎",
+                    UserServiceTag = "打折;会员卡;预约",
+                    Location = "115.90353,28.683058",
+                    DealCount = 2,
+                    PraiseCount = 2,
+                    VendorId = 12,
+                    PicUrl = "http://"
+                }
+            };
+
+            var response = YuntuStore.UpdateData(request);
+        }
+
+        private void YuntuDeleteDataTest()
+        {
+            var request = new DeleteDataRequest
+            {
+                TableId = Tables.VendorTableId,
+                Ids = "1,2,4"
+            };
+
+            var response = YuntuStore.DeleteData(request);
         }
     }
 }
