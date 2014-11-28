@@ -15,6 +15,15 @@ namespace Vendor.Web.Controllers
             return View();
         }
 
+        public ActionResult TranComplete()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult TranComplete([Bind(Include = "CustomerCellphone, CustomCarNo")] DataAccess.Models.VendorOrder order)
+        {
+            return View(order);
+        }
         public ActionResult TranPay()
         {
             return View();
@@ -63,7 +72,7 @@ namespace Vendor.Web.Controllers
             using (var ctx = new DataAccess.Models.CarHealthEntities())
             {
                 var vendorUsers =
-                    ctx.VendorUsers.Where(x => x.Name == vendorUser.Name && x.Password == vendorUser.Password).ToList();
+                    ctx.VendorUsers.Where(x => x.Name.ToLower() == vendorUser.Name.ToLower() && x.Password == vendorUser.Password).ToList();
 
                 if (vendorUsers.Count == 0)
                 {
