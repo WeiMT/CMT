@@ -38,7 +38,9 @@ namespace ToolConsole
 
             //CopyDataFromSqlServer2MySql();
 
-            AliyunOssCors();
+            //AliyunOssCors();
+
+            CopyDataFromSqlServer2MySql();
         }
 
         private static void AliyunOssCors()

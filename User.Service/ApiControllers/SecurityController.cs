@@ -237,9 +237,31 @@ namespace User.Service.ApiControllers
         [HttpGet]
         public dynamic TestAMap()
         {
-            YuntuDeleteDataTest();
+            //YuntuCreateDataTest();
 
-            return null;
+            //YuntuUpdateDataTest();
+
+            //YuntuDeleteDataTest();
+
+            //http://yuntuapi.amap.com/datasearch/around?tableid=54759469e4b04d2bb5a7fe6a&center=115.90354,28.683058&radius=5000&filter=CarServiceTag:清洗&key=7794ce05d75a3b526364cd2ae3f7ee30
+
+            var dict = new Dictionary<string, string>();
+            dict.Add("tableid", "54759469e4b04d2bb5a7fe6a");
+            dict.Add("center", "115.90354,28.683058");
+            dict.Add("radius", "5000");
+            dict.Add("filter", "UserServiceTag:1+UserServiceTag:2+UserServiceTag:5");
+            dict.Add("key", "7794ce05d75a3b526364cd2ae3f7ee30");
+            dict.Add("sig", SignBuilder.Build(dict, Keys.RestApiSignKey));
+
+            var url = "http://yuntuapi.amap.com/datasearch/around?" +
+                      dict.Select(x => x.Key + "=" + x.Value.UrlEncode()).StringJoin("&");
+
+            var httpClient = new HttpClient();
+
+            var result = httpClient.GetStringAsync(url).Result;
+
+
+            return JsonConvert.DeserializeObject<JObject>(result);
         }
 
         private void YuntuCreateDataTest()

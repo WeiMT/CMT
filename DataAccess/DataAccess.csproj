@@ -196,6 +196,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="SqlScripts\CarType.sql" />
+    <Content Include="SqlScripts\Inti.sql" />
     <EntityDeploy Include="Models\CarHealth.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CarHealth.Designer.cs</LastGenOutput>

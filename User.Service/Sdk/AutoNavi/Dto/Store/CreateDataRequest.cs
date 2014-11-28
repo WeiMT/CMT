@@ -86,13 +86,13 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
 
             /// <summary>
             /// 车辆服务标签
-            /// 支持多个标签，以;为分隔符
+            /// 支持多个标签，以空格为分隔符
             /// </summary>
             public string CarServiceTag { get; set; }
 
             /// <summary>
             /// 用户服务标签
-            /// 支持多个标签，以;为分隔符
+            /// 支持多个标签，以空格为分隔符
             /// </summary>
             public string UserServiceTag { get; set; }
 

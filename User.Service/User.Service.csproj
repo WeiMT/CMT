@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\SecurityController.cs" />
+    <Compile Include="ApiControllers\VendorController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,6 +161,7 @@
     <Compile Include="Sdk\AutoNavi\Dto\Store\CreateDataResponse.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\DeleteDataRequest.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\DeleteDataResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchAroundRequest.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataRequest.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataResponse.cs" />
     <Compile Include="Sdk\AutoNavi\Keys.cs" />
