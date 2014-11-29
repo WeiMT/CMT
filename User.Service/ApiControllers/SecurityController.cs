@@ -237,7 +237,7 @@ namespace User.Service.ApiControllers
         [HttpGet]
         public dynamic TestAMap()
         {
-            //return YuntuCreateDataTest();s
+            //return YuntuCreateDataTest();
 
             //return YuntuUpdateDataTest();
 
