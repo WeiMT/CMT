@@ -5,37 +5,13 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
     public class UpdateDataRequest
     {
         /// <summary>
-        /// 客户唯一标识
-        /// 用户申请，由高德地图API后台自动分配
-        /// </summary>
-        [JsonProperty("key")]
-        public string Key { get; set; }
-
-        /// <summary>
         /// 数据表唯一标识        
         /// </summary>
         [JsonProperty("tableid")]
         public string TableId { get; set; }
 
         /// <summary>
-        /// 定位方式
-        /// 设置是以请求中的经纬度参数（_location）还是地址参数（_address）来计算最终的坐标值。 
-        /// 可选值： 
-        /// 1：经纬度；格式示例：104.394729,31.125698 
-        /// 2：地址
-        /// </summary>
-        [JsonProperty("loctype")]
-        public int LocType { get; set; }
-
-        /// <summary>
-        /// 1. 格式：json 
-        /// 2. 更新规则：        
-        /// 1）更新字段值：只更新请求中上传的字段值，未上传的字段保留原值，且系统字段中_id,_createtime,_updatetime三个字段不能被更新。        
-        /// 示例：
-        /// data={"_id":"3","_location":"113.484733,37.837432"}，则本次请求仅更新_location字段值，其他字段如_name，_address等其他用户自定义字段将保持原值。        
-        /// 2）清空字段值：赋值null实现，仅能对用户自定义字段值进行清空操作，云图系统字段（_id,_name,_address,_location,_createtime,_updatetime)不能执行清空。        
-        /// 清空自定义字段示例：
-        /// data={"_id":"3","Ctype":null} //Ctype字段为用户的自定义字段
+        /// 要更新的数据
         /// </summary>
         [JsonProperty("data")]
         public Data UpdateData { get; set; }
@@ -65,10 +41,13 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
 
             /// <summary>
             /// 坐标类型
-            /// 可选值： autonavi gps
+            /// 可选值： autonavi
             /// </summary>
             [JsonProperty("coordtype")]
-            public string CoordType { get; set; }
+            public string CoordType
+            {
+                get { return "autonavi"; }
+            }
 
             /// <summary>
             /// 地址
@@ -92,7 +71,8 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
             public int PraiseCount { get; set; }
 
             /// <summary>
-            /// 分类
+            /// 分类标签
+            /// 支持多个标签，以空格为分隔符
             /// </summary>
             public string Category { get; set; }
 

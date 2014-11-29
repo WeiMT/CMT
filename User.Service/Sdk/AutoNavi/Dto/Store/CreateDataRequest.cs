@@ -6,29 +6,11 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
     public class CreateDataRequest
     {
         /// <summary>
-        /// 客户唯一标识
-        /// 用户申请，由高德地图API后台自动分配
-        /// </summary>
-        [JsonProperty("key")]
-        public string Key { get; set; }
-
-        /// <summary>
         /// 数据表唯一标识
         /// </summary>
         [JsonProperty("tableid")]
         public string TableId { get; set; }
-
-        /// <summary>
-        /// 定位方式
-        /// 设置是以请求中的经纬度参数（_location）还是地址参数（_address） 
-        /// 来计算最终的坐标值。 
-        /// 可选值： 
-        /// 1：经纬度；格式示例：104.394729,31.125698 
-        /// 2：地址；标准格式示例：北京市朝阳区望京阜通东大街6号院3号楼
-        /// </summary>
-        [JsonProperty("loctype")]
-        public int LocType { get; set; }
-
+        
         /// <summary>
         /// 新增的数据
         /// </summary>
@@ -53,10 +35,13 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
 
             /// <summary>
             /// 坐标类型
-            /// 选值：autonavi；gps
+            /// 选值：autonavi
             /// </summary>
             [JsonProperty("coordtype")]
-            public string CoordType { get; set; }
+            public string CoordType
+            {
+                get { return "autonavi"; }
+            }
 
             /// <summary>
             /// 地址
@@ -80,7 +65,8 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
             public int PraiseCount { get; set; }
 
             /// <summary>
-            /// 分类
+            /// 分类标签
+            /// 支持多个标签，以空格为分隔符
             /// </summary>
             public string Category { get; set; }
 

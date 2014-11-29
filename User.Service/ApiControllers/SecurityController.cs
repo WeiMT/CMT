@@ -237,19 +237,90 @@ namespace User.Service.ApiControllers
         [HttpGet]
         public dynamic TestAMap()
         {
-            //YuntuCreateDataTest();
+            //return YuntuCreateDataTest();s
 
-            //YuntuUpdateDataTest();
+            //return YuntuUpdateDataTest();
 
-            //YuntuDeleteDataTest();
+            //return YuntuDeleteDataTest();
 
+            //return YuntuSearchAroundTest();
+
+            return null;
+        }
+
+        private object YuntuCreateDataTest()
+        {
+            var request = new CreateDataRequest
+            {
+                TableId = Tables.VendorTableId,
+                CreateData = new CreateDataRequest.Data
+                {
+                    Name = "南昌八一洗车店",
+                    Category = "洗车",
+                    Address = "南昌八一大道545号",
+                    CarServiceTag = "清洗 贴膜",
+                    UserServiceTag = "折 卡",
+                    Location = "115.90353,28.683058",
+                    DealCount = 1,
+                    PraiseCount = 0,
+                    VendorId = 12,
+                    PicUrl = "http://"
+                }
+            };
+
+            var response = YuntuStore.CreateData(request);
+
+            return null;
+        }
+
+        private object YuntuUpdateDataTest()
+        {
+            var request = new UpdateDataRequest
+            {
+                TableId = Tables.VendorTableId,
+                UpdateData = new UpdateDataRequest.Data
+                {
+                    Id="4",
+                    Name = "南昌八一大道洗车店",
+                    Category = "洗车",
+                    Address = "福州路11号",
+                    CarServiceTag = "美容 贴膜 轮胎",
+                    UserServiceTag = "打折 会员卡 预约",
+                    Location = "115.90353,28.683058",
+                    DealCount = 2,
+                    PraiseCount = 2,
+                    VendorId = 12,
+                    PicUrl = "http://"
+                }
+            };
+
+            var response = YuntuStore.UpdateData(request);
+
+            return null;
+        }
+
+        private object YuntuDeleteDataTest()
+        {
+            var request = new DeleteDataRequest
+            {
+                TableId = Tables.VendorTableId,
+                Ids = "1,2,4"
+            };
+
+            var response = YuntuStore.DeleteData(request);
+
+            return null;
+        }
+
+        private object YuntuSearchAroundTest()
+        {
             //http://yuntuapi.amap.com/datasearch/around?tableid=54759469e4b04d2bb5a7fe6a&center=115.90354,28.683058&radius=5000&filter=CarServiceTag:清洗&key=7794ce05d75a3b526364cd2ae3f7ee30
 
             var dict = new Dictionary<string, string>();
             dict.Add("tableid", "54759469e4b04d2bb5a7fe6a");
             dict.Add("center", "115.90354,28.683058");
             dict.Add("radius", "5000");
-            dict.Add("filter", "UserServiceTag:1+UserServiceTag:2+UserServiceTag:5");
+            dict.Add("filter", "CarServiceTag:贴膜");
             dict.Add("key", "7794ce05d75a3b526364cd2ae3f7ee30");
             dict.Add("sig", SignBuilder.Build(dict, Keys.RestApiSignKey));
 
@@ -262,68 +333,6 @@ namespace User.Service.ApiControllers
 
 
             return JsonConvert.DeserializeObject<JObject>(result);
-        }
-
-        private void YuntuCreateDataTest()
-        {
-            var request = new CreateDataRequest
-            {
-                TableId = Tables.VendorTableId,
-                LocType = 1,
-                CreateData = new CreateDataRequest.Data
-                {
-                    Name = "南昌八一洗车店",
-                    Category = "洗车",
-                    Address = "南昌八一大道545号",
-                    CoordType = "autonavi",
-                    CarServiceTag = "清洗;贴膜",
-                    UserServiceTag = "折;卡",
-                    Location = "115.90353,28.683058",
-                    DealCount = 1,
-                    PraiseCount = 0,
-                    VendorId = 12,
-                    PicUrl = "http://"
-                }
-            };
-
-            var response = YuntuStore.CreateData(request);
-        }
-
-        private void YuntuUpdateDataTest()
-        {
-            var request = new UpdateDataRequest
-            {
-                TableId = Tables.VendorTableId,
-                LocType = 1,
-                UpdateData = new UpdateDataRequest.Data
-                {
-                    Id="4",
-                    Name = "南昌八一大道洗车店",
-                    Category = "洗车",
-                    Address = "福州路11号",
-                    CoordType = "autonavi",
-                    CarServiceTag = "美容;贴膜;轮胎",
-                    UserServiceTag = "打折;会员卡;预约",
-                    Location = "115.90353,28.683058",
-                    DealCount = 2,
-                    PraiseCount = 2,
-                    VendorId = 12,
-                    PicUrl = "http://"
-                }
-            };
-
-            var response = YuntuStore.UpdateData(request);
-        }
-
-        private void YuntuDeleteDataTest()
-        {
-            var request = new DeleteDataRequest
-            {
-                TableId = Tables.VendorTableId,
-                Ids = "1,2,4"
-            };
-
-            var response = YuntuStore.DeleteData(request);
         }
     }
 }

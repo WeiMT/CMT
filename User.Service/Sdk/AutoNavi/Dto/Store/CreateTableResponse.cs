@@ -1,12 +1,18 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace User.Service.Sdk.AutoNavi.Dto.Store
 {
-    public class DeleteDataResponse
+    public class CreateTableResponse
     {
         /// <summary>
         /// 返回状态 
-        /// 取值规则：1：成功；0：失败；-99：失败，网络通讯失败
+        /// 取值规则：
+        /// 1：成功；
+        /// 0：失败，未知原因；
+        /// -11：失败，已存在相同名称表
+        /// -21：失败，已创建表达到最大数据
+        /// -99: 失败，网络通讯失败
         /// </summary>
         [JsonProperty("status")]
         public int Status { get; set; }
@@ -19,15 +25,9 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
         public string Info { get; set; }
 
         /// <summary>
-        /// 删除成功数目
+        /// 生成的数据表的唯一标识
         /// </summary>
-        [JsonProperty("success")]
-        public int Success { get; set; }
-
-        /// <summary>
-        /// 删除失败数目
-        /// </summary>
-        [JsonProperty("fail")]
-        public int Fail { get; set; }
+        [JsonProperty("tableid")]
+        public string TableId { get; set; }
     }
 }

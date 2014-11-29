@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
@@ -21,33 +22,41 @@ namespace User.Service.Sdk.AutoNavi
         /// 表的名称
         /// 支持任意中英文字符、数字、下划线
         /// </param>
-        /// <returns>
-        /// 返回结果，定义参照上面sdk链接
-        /// {            
-        ///     "info":"OK", 
-        ///     "status":1, 
-        ///     "tableid":"53a4093fe4b0a4a84f9b66cf" 
-        /// }
-        /// </returns>
-        public static JObject CreateTable(string tableName)
+        /// <returns></returns>
+        public static CreateTableResponse CreateTable(string tableName)
         {
-            var httpClient = new HttpClient();
-
             var parameters = new Dictionary<string, string>();
             parameters.Add("key",Keys.RestApiKey);
             parameters.Add("name", tableName);
             parameters.Add("sig", SignBuilder.Build(parameters, Keys.RestApiSignKey));
 
-            var content = new FormUrlEncodedContent(parameters);
-            var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/table/create", content).Result;
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return null;
+                var httpClient = new HttpClient();
+
+                var content = new FormUrlEncodedContent(parameters);
+                var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/table/create", content).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new CreateTableResponse
+                    {
+                        Status = -99,
+                        Info = "失败，网络通讯失败"
+                    };
+                }
+
+                var jsonObj = response.Content.ReadAsAsync<CreateTableResponse>().Result;
+
+                return jsonObj;
             }
-
-            var jsonObj = response.Content.ReadAsAsync<JObject>().Result;
-
-            return jsonObj;
+            catch (Exception ex)
+            {
+                return new CreateTableResponse
+                {
+                    Status = -99,
+                    Info = "失败，网络通讯失败"
+                };
+            }
         }
 
         /// <summary>
@@ -59,27 +68,40 @@ namespace User.Service.Sdk.AutoNavi
         /// <returns></returns>
         public static CreateDataResponse CreateData(CreateDataRequest request)
         {
-            request.Key = Keys.RestApiKey;
-
             var parameters = new Dictionary<string, string>();
-            parameters.Add("key",request.Key);
+            parameters.Add("key",Keys.RestApiKey);
             parameters.Add("tableid",request.TableId);
-            parameters.Add("loctype",request.LocType.ToString());
+            parameters.Add("loctype","1");
             parameters.Add("data", JsonConvert.SerializeObject(request.CreateData));
             parameters.Add("sig", SignBuilder.Build(parameters, Keys.RestApiSignKey));
 
-            var httpClient = new HttpClient();
-
-            var content = new FormUrlEncodedContent(parameters);
-            var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/create", content).Result;
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return null;
+                var httpClient = new HttpClient();
+
+                var content = new FormUrlEncodedContent(parameters);
+                var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/create", content).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new CreateDataResponse
+                    {
+                        Status = -99,
+                        Info = "失败，网络通讯失败"
+                    };
+                }
+
+                var jsonObj = response.Content.ReadAsAsync<CreateDataResponse>().Result;
+
+                return jsonObj;
             }
-
-            var jsonObj = response.Content.ReadAsAsync<CreateDataResponse>().Result;
-
-            return jsonObj;
+            catch (Exception ex)
+            {
+                return new CreateDataResponse
+                {
+                    Status = -99,
+                    Info = "失败，网络通讯失败"
+                };
+            }
         }
 
         /// <summary>
@@ -91,27 +113,126 @@ namespace User.Service.Sdk.AutoNavi
         /// <returns></returns>
         public static UpdateDataResponse UpdateData(UpdateDataRequest request)
         {
-            request.Key = Keys.RestApiKey;
-
             var parameters = new Dictionary<string, string>();
-            parameters.Add("key", request.Key);
+            parameters.Add("key", Keys.RestApiKey);
             parameters.Add("tableid", request.TableId);
-            parameters.Add("loctype", request.LocType.ToString());
+            parameters.Add("loctype", "1");
             parameters.Add("data", JsonConvert.SerializeObject(request.UpdateData));
             parameters.Add("sig", SignBuilder.Build(parameters, Keys.RestApiSignKey));
 
-            var httpClient = new HttpClient();
-
-            var content = new FormUrlEncodedContent(parameters);
-            var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/update", content).Result;
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return null;
+                var httpClient = new HttpClient();
+
+                var content = new FormUrlEncodedContent(parameters);
+                var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/update", content).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new UpdateDataResponse
+                    {
+                        Status = -99,
+                        Info = "失败，网络通讯失败"
+                    };
+                }
+
+                var jsonObj = response.Content.ReadAsAsync<UpdateDataResponse>().Result;
+
+                return jsonObj;
             }
+            catch (Exception ex)
+            {
+                return new UpdateDataResponse
+                {
+                    Status = -99,
+                    Info = "失败，网络通讯失败"
+                };
+            }
+        }
 
-            var jsonObj = response.Content.ReadAsAsync<UpdateDataResponse>().Result;
+        /// <summary>
+        /// 更新商户数据中的交易数
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public static UpdateDataDealCountResponse UpdateDataDealCount(UpdateDataDealCountRequest request)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("key", Keys.RestApiKey);
+            parameters.Add("tableid", request.TableId);
+            parameters.Add("loctype", "1");
+            parameters.Add("data", JsonConvert.SerializeObject(request.UpdateData));
+            parameters.Add("sig", SignBuilder.Build(parameters, Keys.RestApiSignKey));
 
-            return jsonObj;
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var content = new FormUrlEncodedContent(parameters);
+                var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/update", content).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new UpdateDataDealCountResponse
+                    {
+                        Status = -99,
+                        Info = "失败，网络通讯失败"
+                    };
+                }
+
+                var jsonObj = response.Content.ReadAsAsync<UpdateDataDealCountResponse>().Result;
+
+                return jsonObj;
+            }
+            catch (Exception ex)
+            {
+                return new UpdateDataDealCountResponse
+                {
+                    Status = -99,
+                    Info = "失败，网络通讯失败"
+                };
+            }
+        }
+
+        /// <summary>
+        /// 更新商户数据中的好评数
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public static UpdateDataPraiseCountResponse UpdateDataPraiseCount(UpdateDataPraiseCountRequest request)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("key", Keys.RestApiKey);
+            parameters.Add("tableid", request.TableId);
+            parameters.Add("loctype", "1");
+            parameters.Add("data", JsonConvert.SerializeObject(request.UpdateData));
+            parameters.Add("sig", SignBuilder.Build(parameters, Keys.RestApiSignKey));
+
+            try
+            {
+                var httpClient = new HttpClient();
+
+                var content = new FormUrlEncodedContent(parameters);
+                var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/update", content).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new UpdateDataPraiseCountResponse
+                    {
+                        Status = -99,
+                        Info = "失败，网络通讯失败"
+                    };
+                }
+
+                var jsonObj = response.Content.ReadAsAsync<UpdateDataPraiseCountResponse>().Result;
+
+                return jsonObj;
+            }
+            catch (Exception ex)
+            {
+                return new UpdateDataPraiseCountResponse
+                {
+                    Status = -99,
+                    Info = "失败，网络通讯失败"
+                };
+            }
         }
 
         /// <summary>
@@ -122,26 +243,39 @@ namespace User.Service.Sdk.AutoNavi
         /// <returns></returns>
         public static DeleteDataResponse DeleteData(DeleteDataRequest request)
         {
-            request.Key = Keys.RestApiKey;
-
             var parameters = new Dictionary<string, string>();
-            parameters.Add("key", request.Key);
+            parameters.Add("key", Keys.RestApiKey);
             parameters.Add("tableid", request.TableId);
             parameters.Add("ids", request.Ids);
             parameters.Add("sig", SignBuilder.Build(parameters, Keys.RestApiSignKey));
 
-            var httpClient = new HttpClient();
-
-            var content = new FormUrlEncodedContent(parameters);
-            var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/delete", content).Result;
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                return null;
+                var httpClient = new HttpClient();
+
+                var content = new FormUrlEncodedContent(parameters);
+                var response = httpClient.PostAsync("http://yuntuapi.amap.com/datamanage/data/delete", content).Result;
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new DeleteDataResponse
+                    {
+                        Status = -99,
+                        Info = "失败，网络通讯失败"
+                    };
+                }
+
+                var jsonObj = response.Content.ReadAsAsync<DeleteDataResponse>().Result;
+
+                return jsonObj;
             }
-
-            var jsonObj = response.Content.ReadAsAsync<DeleteDataResponse>().Result;
-
-            return jsonObj;
+            catch (Exception ex)
+            {
+                return new DeleteDataResponse
+                {
+                    Status = -99,
+                    Info = "失败，网络通讯失败"
+                };
+            }
         }
     }
 }
