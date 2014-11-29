@@ -163,6 +163,9 @@
     <Compile Include="Sdk\AutoNavi\Dto\Store\DeleteDataRequest.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\DeleteDataResponse.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\SearchAroundRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchAroundResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchLocalResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchLocalRequest.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataDealCountRequest.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataDealCountResponse.cs" />
     <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataPraiseCountRequest.cs" />
