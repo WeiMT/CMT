@@ -25,6 +25,7 @@ namespace User.Service.ApiControllers
                     Category = "洗车",
                     Address = "南昌八一大道545号",
                     CarServiceTag = "清洗 贴膜",
+                    
                     UserServiceTag = "折 卡",
                     Location = "115.90353,28.683058",
                     DealCount = 1,
@@ -150,7 +151,7 @@ namespace User.Service.ApiControllers
                 Center = "115.90354,28.683058",
                 Radius = "3000",
                 KeyWords = "",
-                Filter = "",
+                Filter = "CarServiceTag:1",
                 SortRule = "",
                 Limit = "",
                 Page = ""

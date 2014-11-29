@@ -83,10 +83,22 @@ namespace User.Service.Sdk.AutoNavi.Dto.Store
             public string CarServiceTag { get; set; }
 
             /// <summary>
+            /// 车辆服务标签Id
+            /// 支持多个标签Id，以空格为分隔符
+            /// </summary>
+            public string CarServiceTagId { get; set; }
+
+            /// <summary>
             /// 用户服务标签
             /// 支持多个标签，以空格为分隔符
             /// </summary>
             public string UserServiceTag { get; set; }
+
+            /// <summary>
+            /// 用户服务标签Id
+            /// 支持多个标签Id，以空格为分隔符
+            /// </summary>
+            public string UserServiceTagId { get; set; }
 
             /// <summary>
             /// 图片Url
