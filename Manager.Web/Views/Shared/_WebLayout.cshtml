@@ -14,26 +14,26 @@
     <title>@ViewBag.Title</title>
 
     <!-- Bootstrap CSS -->
-    <link href="@Url.Content("~/Content/Bootstrap/3.3.0/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Bootstrap/3.3.1/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- Common Kendo UI CSS -->
-    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.3.1119/styles/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- Default Kendo UI theme CSS -->
-    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.3.1119/styles/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- (optional) Kendo UI DataViz CSS, include only if you will use the data visualisation features -->
-    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.3.1119/styles/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
-    <link href="@Url.Content("~/Content/KendoUI/2014.2.1008/styles/kendo.default.mobile.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/KendoUI/2014.3.1119/styles/kendo.default.mobile.min.css")" rel="stylesheet" type="text/css" />
 
     <!-- Kendo UI & Bootstrap Compatible CSS  -->
     @*<link href="@Url.Content("~/Content/Styles/kendo-bootstrap-compatible.css")" rel="stylesheet" type="text/css" />*@
 
     <!-- Site CSS -->
     <link href="@Url.Content("~/Content/Styles/site.css")" rel="stylesheet" type="text/css" />
-    
+
     <!-- Page Styles Put Here -->
     @RenderSection("Style", false)
 
@@ -41,8 +41,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="@Url.Content("~/Content/Bootstrap/3.3.0/js/html5shiv.min.js")"></script>
-      <script src="@Url.Content("~/Content/Bootstrap/3.3.0/js/respond.min.js")"></script>
+      <script src="@Url.Content("~/Content/Bootstrap/3.3.1/js/html5shiv.min.js")"></script>
+      <script src="@Url.Content("~/Content/Bootstrap/3.3.1/js/respond.min.js")"></script>
     <![endif]-->
 </head>
 <body>
@@ -55,17 +55,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="margin-right:168px;">
+                <a class="navbar-brand" href="#">
                     @*<img alt="微名堂" height="25" src="@Url.Content("~/Content/Images/brand.png")" />*@
                     微名堂 - 有点意思
                 </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">系统设置</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Help</a></li>
+                    @RenderSection("TopNav", true)
                 </ul>
             </div>
         </div>
@@ -74,24 +71,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">车型库管理</a></li>
-                    <li><a href="#">服务项目管理</a></li>
-                    <li><a href="#">Analytics</a></li>
-                    <li><a href="#">Export</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item</a></li>
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                    <li><a href="">More navigation</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                </ul>
+                @RenderSection("SideNav", true)
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 @RenderBody()
@@ -100,18 +80,18 @@
     </div>
 
     <!-- jQuery JavaScript -->
-    <script src="@Url.Content("~/Content/KendoUI/2014.2.1008/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/KendoUI/2014.3.1119/js/jquery.min.js")"></script>
 
     <!-- Kendo UI combined JavaScript -->
-    <script src="@Url.Content("~/Content/KendoUI/2014.2.1008/js/kendo.all.min.js")"></script>
-    <script src="@Url.Content("~/Content/KendoUI/2014.2.1008/js/messages/kendo.messages.zh-CN.min.js")"></script>
+    <script src="@Url.Content("~/Content/KendoUI/2014.3.1119/js/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Content/KendoUI/2014.3.1119/js/messages/kendo.messages.zh-CN.min.js")"></script>
 
     <!-- Bootstrap Javascript -->
-    <script src="@Url.Content("~/Content/Bootstrap/3.3.0/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/Bootstrap/3.3.1/js/bootstrap.min.js")"></script>
 
     <script src="@Url.Content("~/Scripts/jquery.linq.min.js")"></script>
     <script src="@Url.Content("~/Scripts/wind-all-min-0.7.3.js")"></script>
-    
+
     <!-- Page Scripts Put Here -->
     @RenderSection("script", false)
 </body>
