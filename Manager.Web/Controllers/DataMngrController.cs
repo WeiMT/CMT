@@ -17,5 +17,10 @@ namespace Manager.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult VendorTag()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,427 @@
+﻿@{
+    ViewBag.Title = "商户标签管理";
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+@section TopNav
+{
+    <li class="active"><a href="#">数据维护</a></li>
+    <li><a href="#">商户管理</a></li>
+    <li><a href="#">Profile</a></li>
+    <li><a href="#">Help</a></li>
+}
+
+@section SideNav
+{
+    <ul class="nav nav-sidebar">
+        <li><a href="@Url.Action("CarType")">车型库管理</a></li>
+        <li class="active"><a href="#">商户标签管理</a></li>
+        <li><a href="#">服务项目管理</a></li>
+        <li><a href="#">Export</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="">Nav item</a></li>
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+        <li><a href="">More navigation</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+    </ul>
+}
+
+<h1 class="page-header">@ViewBag.Title</h1>
+<ol class="breadcrumb">
+    <li><a href="#panelVendorCategory">商户分类</a></li>
+    <li><a href="#gridMrfl">美容分类</a></li>
+    <li><a href="#gridByfl">保养分类</a></li>
+    <li><a href="#gridWxfl">维修分类</a></li>
+</ol>
+<p>
+    <div class="panel panel-primary">
+        <div id="panelVendorCategory" class="panel-heading">
+            <h3 class="panel-title">商户分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateVendorCategory" class="pull-right">新增</button></h3>
+        </div>
+        <div class="panel-body">
+            <div id="gridVendorCategory" data-role="grid"
+                 data-auto-bind="false"
+                 data-scrollable="true"
+                 data-pageable="false"
+                 data-sortable="false"
+                 data-filterable="false"
+                 data-groupable="false"
+                 data-bind="source: vendorCategories"
+                 data-editable="{
+                        mode: 'inline',
+                        window: {
+                            title: '编辑',
+                            animation: false
+                        },
+                        confirmation: true
+                 }"
+                 data-columns="[
+                        { 'field': 'Name', 'title': '名称', 'width': 100 },
+                        { 'field': 'Memo', 'title': '备注', 'width': 160 },
+                        { 'field': 'PicUrl', 'title': '图片', 'width': 50 },
+                        { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
+                 ]"
+                 style="width: 100%;"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">美容分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateMrfl" class="pull-right">新增</button></h3>
+        </div>
+        <div class="panel-body">
+            <div id="gridMrfl" data-role="grid"
+                 data-auto-bind="false"
+                 data-scrollable="true"
+                 data-pageable="false"
+                 data-sortable="false"
+                 data-filterable="false"
+                 data-groupable="false"
+                 data-bind="source: mrflSources"
+                 data-editable="{
+                        mode: 'popup',
+                        window: {
+                            title: '编辑',
+                            animation: false
+                        },
+                        confirmation: true
+                 }"
+                 data-columns="[
+                        { 'field': 'Name', 'title': '名称', 'width': 100 },
+                        { 'field': 'Memo', 'title': '备注', 'width': 160 },
+                        { 'field': 'PicUrl', 'title': '图片', 'width': 50 },
+                        { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
+                 ]"
+                 style="width: 100%;"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">保养分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateByfl" class="pull-right">新增</button></h3>
+        </div>
+        <div class="panel-body">
+            <div id="gridByfl" data-role="grid"
+                 data-auto-bind="false"
+                 data-scrollable="true"
+                 data-pageable="false"
+                 data-sortable="false"
+                 data-filterable="false"
+                 data-groupable="false"
+                 data-bind="source: byflSources"
+                 data-editable="{
+                        mode: 'popup',
+                        window: {
+                            title: '编辑',
+                            animation: false
+                        },
+                        confirmation: true
+                 }"
+                 data-columns="[
+                        { 'field': 'Name', 'title': '名称', 'width': 100 },
+                        { 'field': 'Memo', 'title': '备注', 'width': 160 },
+                        { 'field': 'PicUrl', 'title': '图片', 'width': 50 },
+                        { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
+                 ]"
+                 style="width: 100%;"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">维修分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateWxfl" class="pull-right">新增</button></h3>
+        </div>
+        <div class="panel-body">
+            <div id="gridWxfl" data-role="grid"
+                 data-auto-bind="false"
+                 data-scrollable="true"
+                 data-pageable="false"
+                 data-sortable="false"
+                 data-filterable="false"
+                 data-groupable="false"
+                 data-bind="source: wxflSources"
+                 data-editable="{
+                        mode: 'popup',
+                        window: {
+                            title: '编辑',
+                            animation: false
+                        },
+                        confirmation: true
+                 }"
+                 data-columns="[
+                        { 'field': 'Name', 'title': '名称', 'width': 100 },
+                        { 'field': 'Memo', 'title': '备注', 'width': 160 },
+                        { 'field': 'PicUrl', 'title': '图片', 'width': 50 },
+                        { 'command': ['edit' , 'destroy'], 'title': '&nbsp;' , 'width': 200 },
+                 ]"
+                 style="width: 100%;"></div>
+        </div>
+    </div>
+</p>
+
+<div id="gotop" style="top: 750px;position: fixed;visibility: hidden;right: 10px;margin-left: 550px;bottom: 50px;width: 28px;height: 70px;text-align: center;background: #0063c8;border-radius: 2px;_position: absolute;_bottom: auto;">
+    <a href="#" style="display: inline-block;padding: 8px 5px;line-height: 14px;font-size: 12px;text-decoration: none;color: #fff;">返回顶部</a>
+</div>
+
+@section script{
+    <script>
+        var vm = kendo.observable({
+            vendorCategories: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/VendorTag/GetVendorTagSourceByGroupName?groupName=商户分类")",
+                        dataType: "json",
+                        cache: false
+                    },
+                    create: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/AddVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    update: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/UpdateVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    destroy: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/DeleteVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    parameterMap: function (data, type) {
+                        if (type == "create") {
+                            data.GroupName = "商户分类";
+                        }
+                        return data;
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id"
+                    }
+                }
+            }),
+            mrflSources: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/VendorTag/GetVendorTagSourceByGroupName?groupName=美容分类")",
+                        dataType: "json",
+                        cache: false
+                    },
+                    create: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/AddVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    update: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/UpdateVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    destroy: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/DeleteVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    parameterMap: function (data, type) {
+                        if (type == "create") {
+                            data.GroupName = "美容分类";
+                        }
+                        return data;
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id"
+                    }
+                }
+            }),
+            byflSources: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/VendorTag/GetVendorTagSourceByGroupName?groupName=保养分类")",
+                        dataType: "json",
+                        cache: false
+                    },
+                    create: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/AddVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    update: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/UpdateVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    destroy: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/DeleteVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    parameterMap: function (data, type) {
+                        if (type == "create") {
+                            data.GroupName = "保养分类";
+                        }
+                        return data;
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id"
+                    }
+                }
+            }),
+            wxflSources: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        type: "GET",
+                        url: "@Url.Content("~/api/VendorTag/GetVendorTagSourceByGroupName?groupName=维修分类")",
+                        dataType: "json",
+                        cache: false
+                    },
+                    create: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/AddVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    update: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/UpdateVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    destroy: {
+                        type: "POST",
+                        url: "@Url.Content("~/api/VendorTag/DeleteVendorTagSource")",
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: "json",
+                        cache: false
+                    },
+                    parameterMap: function (data, type) {
+                        if (type == "create") {
+                            data.GroupName = "维修分类";
+                        }
+                        return data;
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id"
+                    }
+                }
+            }),
+            pGetVendorCategoriesAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.vendorCategories.transport.options.read.data = param;
+                    vm.vendorCategories.read();
+
+                    vm.vendorCategories.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.vendorCategories);
+                        }
+                    });
+                });
+            },
+            pGetMrflSourcesAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.mrflSources.transport.options.read.data = param;
+                    vm.mrflSources.read();
+
+                    vm.mrflSources.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.mrflSources);
+                        }
+                    });
+                });
+            },
+            pGetByflSourcesAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.byflSources.transport.options.read.data = param;
+                    vm.byflSources.read();
+
+                    vm.byflSources.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.byflSources);
+                        }
+                    });
+                });
+            },
+            pGetWxflSourcesAsync: function (param) {
+                var task = Wind.Async.Task;
+
+                return task.create(function (t) {
+                    vm.wxflSources.transport.options.read.data = param;
+                    vm.wxflSources.read();
+
+                    vm.wxflSources.one("requestEnd", function (e) {
+                        if (e.type == "read") {
+                            t.complete("success", vm.wxflSources);
+                        }
+                    });
+                });
+            },
+            CreateVendorCategory: function (e) {
+                $("#gridVendorCategory").data("kendoGrid").addRow();
+            },
+            CreateMrfl: function (e) {
+                $("#gridMrfl").data("kendoGrid").addRow();
+            },
+            CreateByfl: function (e) {
+                $("#gridByfl").data("kendoGrid").addRow();
+            },
+            CreateWxfl: function (e) {
+                $("#gridWxfl").data("kendoGrid").addRow();
+            },
+            ViewLoaded: function () {
+                vm.pGetVendorCategoriesAsync().start();
+                vm.pGetMrflSourcesAsync().start();
+                vm.pGetByflSourcesAsync().start();
+                vm.pGetWxflSourcesAsync().start();
+            },
+        });
+
+        //view section
+        kendo.bind(document.body, vm);
+        vm.ViewLoaded();
+    </script>
+    <script>
+        (function () { var e = $("#gotop"), t = $(window).height(), n = null; $(window).on("scroll", function () { n && clearTimeout(n), n = setTimeout(function () { var n = $(document).scrollTop(); n < 400 ? e.css("visibility", "hidden") : e.css("visibility", "visible"), e.css("top", t - 170 + "px") }, 200) }) })();
+    </script>
+}

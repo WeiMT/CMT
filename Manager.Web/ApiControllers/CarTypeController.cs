@@ -50,7 +50,7 @@ namespace Manager.Web.ApiControllers
                 }
 
                 var total = carTypes.Count();
-                carTypes = carTypes.Skip(skip).Take(take);
+                carTypes = carTypes.Where(x => x.RecStatus == 1).Skip(skip).Take(take);
 
                 return new
                 {
@@ -81,6 +81,8 @@ namespace Manager.Web.ApiControllers
                 carType.Grade = form["Grade"];
                 carType.GasDisplacement = form["GasDisplacement"];
                 carType.GearBox = form["GearBox"];
+                carType.RecCreateDt = DateTime.Now;
+                carType.RecStatus = 1;
 
                 ctx.CarTypes.Add(carType);
 
@@ -137,7 +139,7 @@ namespace Manager.Web.ApiControllers
                 var carType = ctx.CarTypes.FirstOrDefault(x => x.Id == id);
                 if (carType != null)
                 {
-                    ctx.CarTypes.Remove(carType);
+                    carType.RecStatus = 2;
 
                     ctx.SaveChanges();
 
@@ -154,7 +156,7 @@ namespace Manager.Web.ApiControllers
         {
             using (var ctx = new CarHealthEntities())
             {
-                var brandNames = ctx.CarTypes.Select(x => x.BrandName).Distinct().ToList();
+                var brandNames = ctx.CarTypes.Where(x => x.RecStatus == 1).Select(x => x.BrandName).Distinct().ToList();
 
                 return brandNames.OrderBy(x => x).Select(x => new { key = x, val = x });
             }
@@ -166,7 +168,7 @@ namespace Manager.Web.ApiControllers
         {
             using (var ctx = new CarHealthEntities())
             {
-                var mfgrNames = ctx.CarTypes.Where(x => x.BrandName == brandName).Select(x => x.MfgrName).Distinct().ToList();
+                var mfgrNames = ctx.CarTypes.Where(x => x.RecStatus == 1).Where(x => x.BrandName == brandName).Select(x => x.MfgrName).Distinct().ToList();
                 return mfgrNames.OrderBy(x => x).Select(x => new { key = x, val = x });
             }
         }
@@ -177,7 +179,7 @@ namespace Manager.Web.ApiControllers
         {
             using (var ctx = new CarHealthEntities())
             {
-                var carTypeNames = ctx.CarTypes.Where(x => x.BrandName == brandName && x.MfgrName == mfgrName)
+                var carTypeNames = ctx.CarTypes.Where(x => x.RecStatus == 1).Where(x => x.BrandName == brandName && x.MfgrName == mfgrName)
                     .Select(x => x.CarTypeName).Distinct().ToList();
                 return carTypeNames.OrderBy(x => x).Select(x => new { key = x, val = x });
             }
@@ -189,7 +191,7 @@ namespace Manager.Web.ApiControllers
         {
             using (var ctx = new CarHealthEntities())
             {
-                var carTypeYears = ctx.CarTypes.Where(x => x.BrandName == brandName && x.MfgrName == mfgrName && x.CarTypeName == carTypeName)
+                var carTypeYears = ctx.CarTypes.Where(x=>x.RecStatus == 1).Where(x => x.BrandName == brandName && x.MfgrName == mfgrName && x.CarTypeName == carTypeName)
                     .Select(x => x.CarTypeYear).Distinct().ToList();
 
                 return carTypeYears.OrderBy(x => x).Select(x => new { key = x, val = x });

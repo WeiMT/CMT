@@ -1870,6 +1870,7 @@
   <ItemGroup>
     <Compile Include="ApiControllers\ApiSettingController.cs" />
     <Compile Include="ApiControllers\CarTypeController.cs" />
+    <Compile Include="ApiControllers\VendorTagController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\Extensions\QueryableExtension.cs" />
@@ -1889,6 +1890,7 @@
     <Content Include="Views\Shared\_WebLayout.cshtml" />
     <Content Include="Views\Setting\Index.cshtml" />
     <Content Include="Views\DataMngr\CarType.cshtml" />
+    <Content Include="Views\DataMngr\VendorTag.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

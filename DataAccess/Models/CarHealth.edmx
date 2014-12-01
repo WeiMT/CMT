@@ -321,7 +321,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorId" Type="bigint" Nullable="false" />
           <Property Name="TypeId" Type="bigint" Nullable="false" />
           <Property Name="CustomerCellphone" Type="varchar" MaxLength="20" />
@@ -352,7 +352,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorId" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IsRechargable" Type="int" Nullable="false" />
@@ -484,7 +484,7 @@
           <Property Name="Memo" Type="varchar" MaxLength="200" />
           <Property Name="RecCreateDt" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="RecStatus" Type="int" Nullable="false" />
-          <Property Name="PicUrl" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PicUrl" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="vendoruser">
           <Key>
@@ -1057,19 +1057,6 @@
           <Property Name="TagId" Type="Int64" Nullable="false" />
           <Property Name="Sort" Type="Int32" />
         </EntityType>
-        <EntityType Name="VendorTagSource">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
-          <Property Name="RecStatus" Type="Int32" Nullable="false" />
-          <Property Name="PicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="VendorUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -1179,7 +1166,6 @@
           <EntitySet Name="VendorPics" EntityType="CarHealthModel.VendorPic" />
           <EntitySet Name="VendorServices" EntityType="CarHealthModel.VendorService" />
           <EntitySet Name="VendorTags" EntityType="CarHealthModel.VendorTag" />
-          <EntitySet Name="VendorTagSources" EntityType="CarHealthModel.VendorTagSource" />
           <EntitySet Name="VendorUsers" EntityType="CarHealthModel.VendorUser" />
           <EntitySet Name="VendorUserRoles" EntityType="CarHealthModel.VendorUserRole" />
           <EntitySet Name="VendorUserRoleFuncs" EntityType="CarHealthModel.VendorUserRoleFunc" />
@@ -1187,6 +1173,7 @@
           <EntitySet Name="WashingCardLogs" EntityType="CarHealthModel.WashingCardLog" />
           <EntitySet Name="WashingCardTypes" EntityType="CarHealthModel.WashingCardType" />
           <EntitySet Name="Vendors" EntityType="CarHealthModel.Vendor" />
+          <EntitySet Name="VendorTagSources" EntityType="CarHealthModel.VendorTagSource" />
         </EntityContainer>
         <EntityType Name="Vendor">
           <Key>
@@ -1206,6 +1193,19 @@
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VendorTagSource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
+          <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="PicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1693,20 +1693,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VendorTagSources">
-            <EntityTypeMapping TypeName="CarHealthModel.VendorTagSource">
-              <MappingFragment StoreEntitySet="vendortagsource">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="Memo" ColumnName="Memo" />
-                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
-                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
-                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VendorUsers">
             <EntityTypeMapping TypeName="CarHealthModel.VendorUser">
               <MappingFragment StoreEntitySet="vendoruser">
@@ -1806,6 +1792,20 @@
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorTagSources">
+            <EntityTypeMapping TypeName="CarHealthModel.VendorTagSource">
+              <MappingFragment StoreEntitySet="vendortagsource">
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
+                <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

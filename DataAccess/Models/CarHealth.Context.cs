@@ -56,7 +56,6 @@ namespace DataAccess.Models
         public virtual DbSet<VendorPic> VendorPics { get; set; }
         public virtual DbSet<VendorService> VendorServices { get; set; }
         public virtual DbSet<VendorTag> VendorTags { get; set; }
-        public virtual DbSet<VendorTagSource> VendorTagSources { get; set; }
         public virtual DbSet<VendorUser> VendorUsers { get; set; }
         public virtual DbSet<VendorUserRole> VendorUserRoles { get; set; }
         public virtual DbSet<VendorUserRoleFunc> VendorUserRoleFuncs { get; set; }
@@ -64,5 +63,6 @@ namespace DataAccess.Models
         public virtual DbSet<WashingCardLog> WashingCardLogs { get; set; }
         public virtual DbSet<WashingCardType> WashingCardTypes { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<VendorTagSource> VendorTagSources { get; set; }
     }
 }
