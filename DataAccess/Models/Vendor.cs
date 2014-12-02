@@ -28,5 +28,6 @@ namespace DataAccess.Models
         public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
+        public Nullable<long> AdminDivisionId { get; set; }
     }
 }

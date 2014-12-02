@@ -1870,6 +1870,7 @@
   <ItemGroup>
     <Compile Include="ApiControllers\ApiSettingController.cs" />
     <Compile Include="ApiControllers\CarTypeController.cs" />
+    <Compile Include="ApiControllers\VendorController.cs" />
     <Compile Include="ApiControllers\VendorTagController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1877,10 +1878,29 @@
     <Compile Include="Controllers\DataMngrController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\CreateDataRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\CreateDataResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\CreateTableResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\DeleteDataRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\DeleteDataResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchAroundRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchAroundResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchLocalRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\SearchLocalResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataDealCountRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataDealCountResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataPraiseCountRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataPraiseCountResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataRequest.cs" />
+    <Compile Include="Sdk\AutoNavi\Dto\Store\UpdateDataResponse.cs" />
+    <Compile Include="Sdk\AutoNavi\Keys.cs" />
+    <Compile Include="Sdk\AutoNavi\SignBuilder.cs" />
+    <Compile Include="Sdk\AutoNavi\Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1891,6 +1911,7 @@
     <Content Include="Views\Setting\Index.cshtml" />
     <Content Include="Views\DataMngr\CarType.cshtml" />
     <Content Include="Views\DataMngr\VendorTag.cshtml" />
+    <Content Include="Views\Vendor\VendorList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

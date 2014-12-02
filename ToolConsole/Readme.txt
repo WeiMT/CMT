@@ -20,10 +20,10 @@ License agreement: 	https://zextensionmethods.codeplex.com/license
 
 Become a Member: 	http://zzzprojects.com/sign-up/
 
-Copyright © 2014 ZZZ PROJECTS   All rights reserved.
+Copyright ?2014 ZZZ PROJECTS   All rights reserved.
 
 === The MIT License (MIT) ===
-Copyright © 2014 ZZZ PROJECTS
+Copyright ?2014 ZZZ PROJECTS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software
 and associated documentation files (the "Software"), to deal in the Software without restriction,

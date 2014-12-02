@@ -6,7 +6,7 @@
 @section TopNav
 {
     <li class="active"><a href="#">数据维护</a></li>
-    <li><a href="#">商户管理</a></li>
+    <li><a href="@Url.Action("VendorList","Vendor")">商户管理</a></li>
     <li><a href="#">Profile</a></li>
     <li><a href="#">Help</a></li>
 }
@@ -87,7 +87,7 @@
          data-groupable="false"
          data-bind="source: carTypes"
          data-editable="{
-                        mode: 'popup',
+                        mode: 'inline',
                         window: {
                             title: '编辑',
                             animation: false

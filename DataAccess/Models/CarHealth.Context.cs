@@ -64,5 +64,6 @@ namespace DataAccess.Models
         public virtual DbSet<WashingCardType> WashingCardTypes { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorTagSource> VendorTagSources { get; set; }
+        public virtual DbSet<AdminDivision> AdminDivisions { get; set; }
     }
 }

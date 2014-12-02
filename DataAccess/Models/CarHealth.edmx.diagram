@@ -44,6 +44,7 @@
         <EntityTypeShape EntityType="CarHealthModel.WashingCardType" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CarHealthModel.Vendor" Width="1.5" PointX="11.375" PointY="17.75" />
         <EntityTypeShape EntityType="CarHealthModel.VendorTagSource" Width="1.5" PointX="9.375" PointY="11.75" />
+        <EntityTypeShape EntityType="CarHealthModel.AdminDivision" Width="1.5" PointX="13.375" PointY="17.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

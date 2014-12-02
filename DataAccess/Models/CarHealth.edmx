@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CarHealthModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admindivision">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Level" Type="int" />
+          <Property Name="Province" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="County" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="article">
           <Key>
             <PropertyRef Name="Id" />
@@ -252,6 +264,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminDivisionId" Type="bigint" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="2000" />
           <Property Name="Type" Type="int" Nullable="false" />
@@ -564,6 +577,7 @@
           <Property Name="Memo" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityContainer Name="CarHealthModelStoreContainer">
+          <EntitySet Name="admindivision" EntityType="Self.admindivision" Schema="carhealth" store:Type="Tables" />
           <EntitySet Name="article" EntityType="Self.article" Schema="carhealth" store:Type="Tables" />
           <EntitySet Name="caraccessoryitem" EntityType="Self.caraccessoryitem" Schema="carhealth" store:Type="Tables" />
           <EntitySet Name="carserviceitem" EntityType="Self.carserviceitem" Schema="carhealth" store:Type="Tables" />
@@ -1174,6 +1188,7 @@
           <EntitySet Name="WashingCardTypes" EntityType="CarHealthModel.WashingCardType" />
           <EntitySet Name="Vendors" EntityType="CarHealthModel.Vendor" />
           <EntitySet Name="VendorTagSources" EntityType="CarHealthModel.VendorTagSource" />
+          <EntitySet Name="AdminDivisions" EntityType="CarHealthModel.AdminDivision" />
         </EntityContainer>
         <EntityType Name="Vendor">
           <Key>
@@ -1193,6 +1208,7 @@
           <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
+          <Property Name="AdminDivisionId" Type="Int64" />
         </EntityType>
         <EntityType Name="VendorTagSource">
           <Key>
@@ -1206,6 +1222,18 @@
           <Property Name="RecCreateDt" Type="DateTime" Nullable="false" />
           <Property Name="RecStatus" Type="Int32" Nullable="false" />
           <Property Name="PicUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AdminDivision">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="Int32" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1779,6 +1807,7 @@
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="CarHealthModel.Vendor">
               <MappingFragment StoreEntitySet="vendor">
+                <ScalarProperty Name="AdminDivisionId" ColumnName="AdminDivisionId" />
                 <ScalarProperty Name="RecStatus" ColumnName="RecStatus" />
                 <ScalarProperty Name="RecCreateDt" ColumnName="RecCreateDt" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
@@ -1806,6 +1835,19 @@
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminDivisions">
+            <EntityTypeMapping TypeName="CarHealthModel.AdminDivision">
+              <MappingFragment StoreEntitySet="admindivision">
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

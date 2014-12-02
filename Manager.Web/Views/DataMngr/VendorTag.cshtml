@@ -6,7 +6,7 @@
 @section TopNav
 {
     <li class="active"><a href="#">数据维护</a></li>
-    <li><a href="#">商户管理</a></li>
+    <li><a href="@Url.Action("VendorList","Vendor")">商户管理</a></li>
     <li><a href="#">Profile</a></li>
     <li><a href="#">Help</a></li>
 }
@@ -36,13 +36,13 @@
 <h1 class="page-header">@ViewBag.Title</h1>
 <ol class="breadcrumb">
     <li><a href="#panelVendorCategory">商户分类</a></li>
-    <li><a href="#gridMrfl">美容分类</a></li>
-    <li><a href="#gridByfl">保养分类</a></li>
-    <li><a href="#gridWxfl">维修分类</a></li>
+    <li><a href="#panelMrfl">美容分类</a></li>
+    <li><a href="#panelByfl">保养分类</a></li>
+    <li><a href="#panelWxfl">维修分类</a></li>
 </ol>
 <p>
-    <div class="panel panel-primary">
-        <div id="panelVendorCategory" class="panel-heading">
+    <div id="panelVendorCategory" class="panel panel-primary">
+        <div class="panel-heading">
             <h3 class="panel-title">商户分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateVendorCategory" class="pull-right">新增</button></h3>
         </div>
         <div class="panel-body">
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="panel panel-primary">
+    <div id="panelMrfl" class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">美容分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateMrfl" class="pull-right">新增</button></h3>
         </div>
@@ -86,7 +86,7 @@
                  data-groupable="false"
                  data-bind="source: mrflSources"
                  data-editable="{
-                        mode: 'popup',
+                        mode: 'inline',
                         window: {
                             title: '编辑',
                             animation: false
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <div class="panel panel-primary">
+    <div id="panelByfl" class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">保养分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateByfl" class="pull-right">新增</button></h3>
         </div>
@@ -117,7 +117,7 @@
                  data-groupable="false"
                  data-bind="source: byflSources"
                  data-editable="{
-                        mode: 'popup',
+                        mode: 'inline',
                         window: {
                             title: '编辑',
                             animation: false
@@ -134,7 +134,7 @@
         </div>
     </div>
 
-    <div class="panel panel-primary">
+    <div id="panelWxfl" class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">维修分类标签 <button data-role="button" data-icon="plus" data-bind="click:CreateWxfl" class="pull-right">新增</button></h3>
         </div>
@@ -148,7 +148,7 @@
                  data-groupable="false"
                  data-bind="source: wxflSources"
                  data-editable="{
-                        mode: 'popup',
+                        mode: 'inline',
                         window: {
                             title: '编辑',
                             animation: false

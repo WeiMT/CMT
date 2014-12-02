@@ -41,6 +41,10 @@ namespace ToolConsole
             //AliyunOssCors();
 
             //CopyDataFromSqlServer2MySql();
+
+            //GetAdminDivisions();
+
+            ProcessAdminDivisions();
         }
 
         private static void AliyunOssCors()
@@ -179,6 +183,92 @@ namespace ToolConsole
 
 
             return "";
+        }
+
+        public static void GetAdminDivisions()
+        {
+            using (var ctx = new CarHealthEntities())
+            {
+                var lines = File.ReadLines("AdminDivision.txt");
+
+                var writer = File.CreateText("Admin1.txt");
+
+                foreach (var line in lines)
+                {
+                    if (!string.IsNullOrEmpty(line))
+                    {
+                        var reg = new Regex(@"(\d{6})\s*(\w*)");
+                        var match = reg.Match(line);
+                        if (match.Success)
+                        {
+                            var code = match.Groups[1].Value;
+                            var name = match.Groups[2].Value;
+
+                            var division = new AdminDivision
+                            {
+                                Code = code,
+                                Name = name
+                            };
+
+                            ctx.AdminDivisions.Add(division);
+
+                            Console.WriteLine(code + " :: " + name);
+                        }
+                    }
+                }
+
+                writer.Close();
+
+                ctx.SaveChanges();
+
+                Console.WriteLine("完成，按任意键退出");
+                Console.ReadKey();
+            }            
+        }
+
+        public static void ProcessAdminDivisions()
+        {
+            using (var ctx = new CarHealthEntities())
+            {
+                //var cities = ctx.AdminDivisions.Where(x => x.Code.EndsWith("00") && x.Name == "市辖区").ToList();
+
+                //cities.ForEach(x =>
+                //{
+                //    var city = ctx.AdminDivisions.First(y => y.Code == x.Code.Substring(0, 2) + "0000");
+                //    Console.WriteLine(city.Code + " :: " + city.Name);
+                //    Console.WriteLine(x.Code + " :: " + x.Name);
+                //});
+
+                //var divisions = ctx.AdminDivisions.Where(x => x.Name.IndexOf("直辖") > 0).ToList();
+
+                //divisions.ForEach(x =>
+                //{
+                //    var city = ctx.AdminDivisions.First(y => y.Code == x.Code.Substring(0, 2) + "0000");
+                //    Console.WriteLine(city.Code + " :: " + city.Name);
+                //    Console.WriteLine(x.Code + " :: " + x.Name);
+                //});
+
+                var counties = ctx.AdminDivisions.Where(x => x.Level == 3 && String.IsNullOrEmpty(x.Province)).ToList();
+
+                counties.ForEach(x =>
+                {
+                    var pcode = x.Code.Substring(0, 2) + "0000";
+                    var province = ctx.AdminDivisions.First(y => y.Level == 1 && y.Code == pcode);
+
+                    var ccode = x.Code.Substring(0, 4) + "00";
+                    var city = ctx.AdminDivisions.First(y => y.Level == 2 && y.Code == ccode);
+
+                    x.Province = province.Name;
+                    x.City = city.Name;
+                    x.County = x.Name;
+
+                    Console.WriteLine(x.Code + " :: " + x.Name);
+                });
+
+                ctx.SaveChanges();
+            }
+
+            Console.ReadKey();
         }
     }
 }
