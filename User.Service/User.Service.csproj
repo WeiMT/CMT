@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Helpers\AesHelper.cs" />
     <Compile Include="Helpers\CommonHelper.cs" />
+    <Compile Include="Helpers\LngLatDistanceHelper.cs" />
     <Compile Include="Helpers\LocalUserTokenHelper.cs" />
     <Compile Include="Helpers\TokenBuilder.cs" />
     <Compile Include="Models\AzUser.cs" />
