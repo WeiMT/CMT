@@ -12,19 +12,14 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WashingCard
+    public partial class SysVendorProductCatalog
     {
         public long Id { get; set; }
-        public long VendorId { get; set; }
-        public long CardTypeId { get; set; }
-        public string CardNo { get; set; }
-        public string CustomerCellphone { get; set; }
-        public int Balance { get; set; }
-        public Nullable<System.DateTime> IssueDt { get; set; }
-        public Nullable<System.DateTime> LatestUseDt { get; set; }
-        public Nullable<System.DateTime> ExpireDt { get; set; }
-        public Nullable<System.DateTime> CancelDt { get; set; }
-        public int Status { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> IsLeaf { get; set; }
+        public int Type { get; set; }
+        public Nullable<long> ParentId { get; set; }
+        public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
     }

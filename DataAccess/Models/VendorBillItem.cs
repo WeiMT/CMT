@@ -17,9 +17,12 @@ namespace DataAccess.Models
         public long Id { get; set; }
         public long BillId { get; set; }
         public long OrderItemId { get; set; }
-        public Nullable<decimal> Cost { get; set; }
-        public Nullable<decimal> RealCost { get; set; }
-        public Nullable<int> IsDiscount { get; set; }
+        public Nullable<long> VendorCardId { get; set; }
+        public Nullable<long> VendorCardDiscountItemId { get; set; }
+        public Nullable<long> ComboCardId { get; set; }
+        public Nullable<long> ComboCardItemId { get; set; }
+        public Nullable<decimal> Fee { get; set; }
+        public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStaus { get; set; }
     }

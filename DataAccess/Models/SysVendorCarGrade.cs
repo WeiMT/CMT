@@ -12,25 +12,10 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Vendor
+    public partial class SysVendorCarGrade
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
-        public int Type { get; set; }
-        public string Province { get; set; }
-        public string City { get; set; }
-        public string BeginTime { get; set; }
-        public string EndTime { get; set; }
-        public Nullable<int> GroupType { get; set; }
-        public Nullable<long> GroupParentId { get; set; }
-        public string Address { get; set; }
-        public string Telephone { get; set; }
-        public string Cellphone { get; set; }
-        public string Longitude { get; set; }
-        public string Latitude { get; set; }
-        public string ShortName { get; set; }
         public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }

@@ -12,17 +12,21 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class VendorEmployee
+    public partial class VendorProductCatalog
     {
         public long Id { get; set; }
         public long VendorId { get; set; }
-        public string Code { get; set; }
         public string Name { get; set; }
-        public string NickName { get; set; }
-        public string Speciality { get; set; }
-        public string Description { get; set; }
+        public int IsLeaf { get; set; }
+        public int Type { get; set; }
+        public Nullable<long> ParentId { get; set; }
         public string Memo { get; set; }
-        public string Title { get; set; }
+        public Nullable<long> SysCatalogId { get; set; }
+        public Nullable<int> CanDiscount { get; set; }
         public Nullable<int> IsShowOnApp { get; set; }
+        public Nullable<decimal> MaxPrice { get; set; }
+        public Nullable<decimal> MinPrice { get; set; }
+        public System.DateTime RecCreate { get; set; }
+        public int RecStatus { get; set; }
     }
 }

@@ -12,20 +12,20 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class VendorCarServiceItem
+    public partial class VendorComboCard
     {
         public long Id { get; set; }
         public long VendorId { get; set; }
-        public string Name { get; set; }
-        public string NamePinyin { get; set; }
-        public int Type { get; set; }
-        public string Unit { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public string Memo { get; set; }
-        public Nullable<int> IsCommon { get; set; }
+        public long TypeId { get; set; }
+        public Nullable<long> CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerCellphone { get; set; }
+        public string CardNo { get; set; }
+        public Nullable<System.DateTime> IssueDt { get; set; }
+        public Nullable<System.DateTime> LatestUseDt { get; set; }
+        public Nullable<System.DateTime> CancelDt { get; set; }
+        public Nullable<int> Status { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
-        public Nullable<int> IsCatalog { get; set; }
-        public Nullable<long> ParentId { get; set; }
     }
 }

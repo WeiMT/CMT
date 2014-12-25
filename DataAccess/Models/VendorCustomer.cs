@@ -12,18 +12,13 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WashingCardType
+    public partial class VendorCustomer
     {
         public long Id { get; set; }
         public long VendorId { get; set; }
         public string Name { get; set; }
-        public int Times { get; set; }
-        public decimal Money { get; set; }
-        public int IsCardNoLimit { get; set; }
-        public Nullable<int> CardNoLimitCount { get; set; }
-        public int IsExpireLimt { get; set; }
-        public Nullable<int> YearExpireLimit { get; set; }
-        public Nullable<int> MonthExpireLimit { get; set; }
-        public string Memo { get; set; }
+        public string Cellphone { get; set; }
+        public Nullable<System.DateTime> LatestActiveDt { get; set; }
+        public string Company { get; set; }
     }
 }

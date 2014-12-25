@@ -12,13 +12,11 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WashingCardLog
+    public partial class BillItemDiscount
     {
         public long Id { get; set; }
-        public long CardId { get; set; }
-        public int Type { get; set; }
-        public string CardNo { get; set; }
-        public System.DateTime LogDt { get; set; }
-        public string Memo { get; set; }
+        public long BillItemId { get; set; }
+        public Nullable<long> FavourableSchemeId { get; set; }
+        public Nullable<long> FavourableDiscountItemId { get; set; }
     }
 }

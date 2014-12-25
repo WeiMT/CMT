@@ -17,6 +17,7 @@ namespace DataAccess.Models
         public long Id { get; set; }
         public long VendorId { get; set; }
         public string Name { get; set; }
+        public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
     }

@@ -15,16 +15,14 @@ namespace DataAccess.Models
     public partial class VendorBill
     {
         public long Id { get; set; }
+        public string BillNo { get; set; }
         public long VendorId { get; set; }
-        public Nullable<long> OrderId { get; set; }
-        public Nullable<long> VendorCardId { get; set; }
-        public Nullable<long> FavourableSchemeId { get; set; }
-        public System.DateTime BillDt { get; set; }
+        public long OrderId { get; set; }
         public Nullable<long> PayPattern { get; set; }
+        public System.DateTime BillDt { get; set; }
         public int Status { get; set; }
-        public Nullable<decimal> Cost { get; set; }
-        public Nullable<decimal> RealCost { get; set; }
-        public Nullable<int> IsDiscount { get; set; }
+        public Nullable<decimal> Fee { get; set; }
+        public Nullable<decimal> RealFee { get; set; }
         public Nullable<int> IsManualDiscount { get; set; }
         public Nullable<decimal> ManualDiscountAmmount { get; set; }
         public string Memo { get; set; }

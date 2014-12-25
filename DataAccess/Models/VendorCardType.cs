@@ -18,12 +18,16 @@ namespace DataAccess.Models
         public long VendorId { get; set; }
         public string Name { get; set; }
         public int IsRechargable { get; set; }
+        public Nullable<int> RechargeType { get; set; }
         public string RechargeRate { get; set; }
         public int IsDiscountable { get; set; }
+        public Nullable<int> DiscountRange { get; set; }
         public Nullable<long> DiscountSchemeId { get; set; }
         public Nullable<long> NextCardTypeId { get; set; }
         public Nullable<int> NextCardTypeCredits { get; set; }
         public Nullable<int> IsOnlineSelfService { get; set; }
         public string Description { get; set; }
+        public System.DateTime RecCreateDt { get; set; }
+        public int RecStatus { get; set; }
     }
 }

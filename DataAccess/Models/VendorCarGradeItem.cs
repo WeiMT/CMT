@@ -12,18 +12,15 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CarServiceItem
+    public partial class VendorCarGradeItem
     {
         public long Id { get; set; }
+        public long VendorId { get; set; }
+        public long VendorCarGradeId { get; set; }
         public string Name { get; set; }
-        public string NamePinyin { get; set; }
-        public int Type { get; set; }
-        public string Unit { get; set; }
+        public Nullable<long> SysCarGradeItemId { get; set; }
         public string Memo { get; set; }
-        public Nullable<int> IsCommon { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
-        public Nullable<int> IsCatalog { get; set; }
-        public Nullable<long> ParentId { get; set; }
     }
 }

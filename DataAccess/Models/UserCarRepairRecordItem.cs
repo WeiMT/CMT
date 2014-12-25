@@ -17,14 +17,17 @@ namespace DataAccess.Models
         public long Id { get; set; }
         public long RecordId { get; set; }
         public string Name { get; set; }
-        public int Type { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public Nullable<long> BillItemId { get; set; }
+        public Nullable<long> ProductId { get; set; }
+        public Nullable<long> ProductModelId { get; set; }
+        public Nullable<long> ProductCarGradeId { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> RealPrice { get; set; }
         public Nullable<decimal> Quantity { get; set; }
         public string Unit { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
-        public Nullable<long> ItemId { get; set; }
     }
 }

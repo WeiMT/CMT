@@ -19,8 +19,8 @@ namespace DataAccess.Models
         public string Name { get; set; }
         public string ShortName { get; set; }
         public string Memo { get; set; }
+        public string PicUrl { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
-        public string PicUrl { get; set; }
     }
 }

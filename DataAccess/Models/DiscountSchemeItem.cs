@@ -16,11 +16,15 @@ namespace DataAccess.Models
     {
         public long Id { get; set; }
         public long SchemeId { get; set; }
-        public Nullable<long> ServiceItemId { get; set; }
-        public Nullable<long> AccessoryItemId { get; set; }
+        public Nullable<long> ProductId { get; set; }
+        public Nullable<long> ProductModelId { get; set; }
+        public Nullable<long> ProductCarGradeId { get; set; }
         public Nullable<int> DiscountType { get; set; }
         public Nullable<int> DiscountRate { get; set; }
         public Nullable<decimal> DiscountPrice { get; set; }
         public Nullable<decimal> Member { get; set; }
+        public string Memo { get; set; }
+        public System.DateTime RecCreateDt { get; set; }
+        public int RecStatus { get; set; }
     }
 }

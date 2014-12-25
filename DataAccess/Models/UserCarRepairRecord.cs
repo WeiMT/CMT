@@ -22,7 +22,8 @@ namespace DataAccess.Models
         public string RepairPlace { get; set; }
         public Nullable<int> Type { get; set; }
         public string Memo { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> RealPrice { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
     }

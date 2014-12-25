@@ -63,7 +63,7 @@
     <Compile Include="Models\Article.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarAccessoryItem.cs">
+    <Compile Include="Models\BillItemDiscount.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarHealth.Context.cs">
@@ -81,9 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CarHealth.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarServiceItem.cs">
-      <DependentUpon>CarHealth.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CarType.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
@@ -96,6 +93,9 @@
     <Compile Include="Models\FavourableScheme.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderItemDiscount.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RepairRecordEvaluate.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
@@ -103,6 +103,18 @@
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SystemSetting.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysVendorCarGrade.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysVendorCarGradeItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysVendorProductCatalog.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysVendorProductNature.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -135,9 +147,6 @@
     <Compile Include="Models\VendorBillItem.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VendorCarAccessoryItem.cs">
-      <DependentUpon>CarHealth.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\VendorCard.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
@@ -147,7 +156,28 @@
     <Compile Include="Models\VendorCardType.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VendorCarServiceItem.cs">
+    <Compile Include="Models\VendorCarGrade.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCarGradeItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorComboCard.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorComboCardItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorComboCardLog.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorComboCardType.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorComboCardTypeItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorCustomer.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VendorEmployee.cs">
@@ -163,6 +193,24 @@
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VendorPic.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProduct.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProductCarGrade.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProductCarGradeItem.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProductCatalog.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProductModel.cs">
+      <DependentUpon>CarHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProductNature.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VendorService.cs">
@@ -181,15 +229,6 @@
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VendorUserRoleFunc.cs">
-      <DependentUpon>CarHealth.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WashingCard.cs">
-      <DependentUpon>CarHealth.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WashingCardLog.cs">
-      <DependentUpon>CarHealth.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WashingCardType.cs">
       <DependentUpon>CarHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

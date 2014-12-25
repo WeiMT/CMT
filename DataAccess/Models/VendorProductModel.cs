@@ -12,17 +12,17 @@ namespace DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CarAccessoryItem
+    public partial class VendorProductModel
     {
         public long Id { get; set; }
-        public string Name { get; set; }
-        public string NamePinyin { get; set; }
-        public string Unit { get; set; }
+        public long VendorId { get; set; }
+        public long VendorProductId { get; set; }
+        public string BrandName { get; set; }
+        public string ModelName { get; set; }
+        public decimal Price { get; set; }
+        public Nullable<int> IsDefault { get; set; }
         public string Memo { get; set; }
-        public Nullable<int> IsCommon { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
-        public Nullable<int> IsCatalog { get; set; }
-        public Nullable<long> ParentId { get; set; }
     }
 }

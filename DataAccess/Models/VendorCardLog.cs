@@ -16,6 +16,8 @@ namespace DataAccess.Models
     {
         public long Id { get; set; }
         public long CardId { get; set; }
+        public string CarNo { get; set; }
+        public Nullable<long> BillItemId { get; set; }
         public int Type { get; set; }
         public Nullable<decimal> Money { get; set; }
         public Nullable<int> Credits { get; set; }

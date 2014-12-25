@@ -16,14 +16,21 @@ namespace DataAccess.Models
     {
         public long Id { get; set; }
         public long OrderId { get; set; }
-        public int RepairType { get; set; }
-        public string Name { get; set; }
         public int ItemType { get; set; }
-        public Nullable<long> ItemId { get; set; }
-        public Nullable<decimal> Cost { get; set; }
-        public Nullable<decimal> Quantity { get; set; }
+        public Nullable<long> VendorCardId { get; set; }
+        public Nullable<long> VendorCardDiscountItemId { get; set; }
+        public Nullable<long> ComboCardId { get; set; }
+        public Nullable<long> ComboCardItemId { get; set; }
+        public Nullable<long> ProductId { get; set; }
+        public Nullable<long> ProductModelId { get; set; }
+        public Nullable<long> ProductCarGradeId { get; set; }
+        public string Name { get; set; }
         public string Unit { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<decimal> Quantity { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> DiscountedPrice { get; set; }
+        public Nullable<long> EmployeeId { get; set; }
         public string Memo { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }

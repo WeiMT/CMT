@@ -15,13 +15,16 @@ namespace DataAccess.Models
     public partial class VendorOrder
     {
         public long Id { get; set; }
+        public string OrderNo { get; set; }
         public long VendorId { get; set; }
+        public Nullable<long> CustomerId { get; set; }
+        public string CustomerName { get; set; }
         public string CustomerCellphone { get; set; }
         public string CustomCarNo { get; set; }
-        public Nullable<long> VendorCardId { get; set; }
-        public Nullable<System.DateTime> RepairDt { get; set; }
+        public Nullable<System.DateTime> OrderDt { get; set; }
         public string Memo { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> DiscountedPrice { get; set; }
         public int Status { get; set; }
         public System.DateTime RecCreateDt { get; set; }
         public int RecStatus { get; set; }
