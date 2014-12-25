@@ -14,7 +14,7 @@
     <RootNamespace>Manager.Web</RootNamespace>
     <AssemblyName>Manager.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1945,7 +1945,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>39345</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Manager.Web</IISUrl>
+          <IISUrl>http://localhost:8423/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -164,9 +164,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\Filters\SessionRequiredMvcAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\VendorUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,17 +176,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\TranReg.cshtml" />
-    <Content Include="Views\Home\TranItem.cshtml" />
-    <Content Include="Views\VendorUsers\Create.cshtml" />
-    <Content Include="Views\VendorUsers\Delete.cshtml" />
-    <Content Include="Views\VendorUsers\Details.cshtml" />
-    <Content Include="Views\VendorUsers\Edit.cshtml" />
-    <Content Include="Views\VendorUsers\Index.cshtml" />
-    <Content Include="Views\Home\TranPay.cshtml" />
-    <Content Include="Views\Home\TranComplete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -198,7 +185,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Common\Filters\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Aliyun.OpenServices.OpenStorageService;
 using DataAccess.Models;
 
 namespace ToolConsole
@@ -72,18 +71,18 @@ namespace ToolConsole
 
         }
 
-        private static void AliyunOssCors()
-        {
-            var ossClient = new OssClient("http://oss-cn-qingdao.aliyuncs.com","XoXv5sH7MgJxcncn", "ofmaSR89yerptS9s0ne4mzp21zDCZ0");
-            var corsReq = new SetBucketCorsRequest("bkcdn");
-            var corsRule = new CORSRule();
-            corsRule.AddAllowedOrigin("*");
-            corsRule.AddAllowedMethod("GET");
+        //private static void AliyunOssCors()
+        //{
+        //    var ossClient = new OssClient("http://oss-cn-qingdao.aliyuncs.com","XoXv5sH7MgJxcncn", "ofmaSR89yerptS9s0ne4mzp21zDCZ0");
+        //    var corsReq = new SetBucketCorsRequest("bkcdn");
+        //    var corsRule = new CORSRule();
+        //    corsRule.AddAllowedOrigin("*");
+        //    corsRule.AddAllowedMethod("GET");
 
-            corsReq.AddCORSRule(corsRule);
+        //    corsReq.AddCORSRule(corsRule);
 
-            ossClient.SetBucketCors(corsReq);
-        }
+        //    ossClient.SetBucketCors(corsReq);
+        //}
 
         static string MD5Sign(string prestr, string key = "", string _input_charset = "utf-8")
             {
